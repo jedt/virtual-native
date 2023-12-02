@@ -1,7 +1,7 @@
 # virtual-native
 Create native apps in macOS using Javascript virtual DOM
 
-This is a small project to deconstruct the react native infrastruction. Removing react from react-native and only using a virtual-dom
+This is a small project to deconstruct the react native infrastructure. Removing react from react-native and only using a virtual dom
 
 Example code:
 ```
