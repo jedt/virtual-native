@@ -1,0 +1,74 @@
+{
+  "t": "VirtualNode",
+  "tn": "DIV",
+  "p": {
+    "id": "root"
+  },
+  "c": [
+    {
+      "t": "VirtualNode",
+      "tn": "BODY",
+      "c": [
+        {
+          "t": "VirtualNode",
+          "tn": "DIV",
+          "p": {
+            "id": "tree-div",
+            "height": 100,
+            "width": 100,
+            "backgroundColor": "#00BFFF"
+          },
+          "c": [
+            {
+              "t": "VirtualNode",
+              "tn": "DIV",
+              "p": {
+                "id": "some-id",
+                "className": "foo"
+              },
+              "c": [
+                {
+                  "t": "VirtualNode",
+                  "tn": "SPAN",
+                  "c": [
+                    {
+                      "t": "VirtualTree",
+                      "x": "span text"
+                    }
+                  ]
+                },
+                {
+                  "t": "VirtualNode",
+                  "tn": "INPUT",
+                  "p": {
+                    "type": "text",
+                    "value": {
+                      "value": "foo-tree",
+                      "hook": {}
+                    },
+                    "height": 80,
+                    "backgroundColor": "#63B8FF",
+                    "width": 80
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "t": "VirtualNode",
+          "tn": "INPUT",
+          "p": {
+            "type": "text",
+            "value": {
+              "value": "bar",
+              "hook": {}
+            },
+            "height": 18,
+            "width": 40
+          }
+        }
+      ]
+    }
+  ]
+}
