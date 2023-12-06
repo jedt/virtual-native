@@ -1,7 +1,7 @@
-const WebSocket = require('ws');
-const webpack = require('webpack');
-const webpackConfig = require('./webpack.config.js'); // Import your Webpack config
-const events = require('events');
+import WebSocket from 'ws';
+import webpack from 'webpack';
+import webpackConfig from './webpack.config'; // Import your Webpack config
+import events from 'events';
 
 // Function to start Webpack compilation
 

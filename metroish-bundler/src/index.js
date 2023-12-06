@@ -9,7 +9,7 @@ function render()  {
         h('div', { id: '2222', backgroundColor: '#EAEAEA' }),
     ];
 
-    const mid = h('text', {text:'The Dog', fontSize: 12});
+    const mid = h('text', {text:'Lazy Dog 123', fontSize: 12});
 
     const children = [
         h('div', { id: 'first-child', flexDirection: 'row', backgroundColor: '#FFB6C1' }, grandChildren),
