@@ -9,6 +9,7 @@ import AppKit
 import JavaScriptCore
 import Cocoa
 import CoreText
+import Starscream
 
 class QuartzRootView: NSView {
     var drawNode : Any?
@@ -21,6 +22,20 @@ class QuartzRootView: NSView {
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
     }
+    func calcWidth(_ fontSize: Int, _ textDisplay: String) -> CGFloat {
+        let font = NSFont(name: "Helvetica", size: CGFloat(fontSize))
+        let attributes = [NSAttributedString.Key.font: font]
+        let attributedString = NSAttributedString(string: textDisplay, attributes: attributes as [NSAttributedString.Key : Any])
+        let size = attributedString.size()
+        return size.width
+    }
+    
+    func calcBoundingBox(_ origin : CGPoint, _ fontSize: Int, _ textDisplay: String) -> NSRect {
+        let width = calcWidth(fontSize, textDisplay)
+        let height = CGFloat(fontSize)
+        let boundingBox = NSRect(x: 0, y: origin.y, width: width, height: height)
+        return boundingBox
+    }
     
     func buildViewTree(from rootNode: TreeNode) -> [[String: Any]] {
         var viewFrames = [[String: Any]]()
@@ -32,14 +47,47 @@ class QuartzRootView: NSView {
 
             let flexDirection = node.p?.flexDirection ?? "column"
             let rectPositions = calculateRectPositions(flexDirection: flexDirection, containerFrame: containerFrame, childrenFlexGrow: childrenFlexGrow, spacing: spacing)
-
+            
+            var opacity = 1.0 //initially the div is invisible
+            var bgColor = "#FFFFFF"
+            var textDisplay = ""
+            var fontSize = 12
+            
+            if (node.tn == "DIV") {
+                opacity = 0.0
+                if (node.p?.backgroundColor != nil) {
+                    bgColor = (node.p?.backgroundColor)!
+                    opacity = 1.0
+                }
+            }
+            else if (node.tn == "TEXT") {
+                textDisplay = node.p?.text ?? ""
+                fontSize = (node.p?.fontSize)!
+            }
+            
             for (index, rect) in rectPositions.enumerated() {
-                let frameData: [String: Any] = [
-                    "id": node.p?.id ?? "",
-                    "backgroundColor": node.p?.backgroundColor ?? "",
-                    "frame": rect,
-                    "text": node.p?.id ?? "",
-                ]
+                var frameData: [String: Any]
+                if (node.tn == "DIV") {
+                    frameData = [
+                        "id": node.p?.id ?? "",
+                        "backgroundColor": bgColor,
+                        "opacity": opacity,
+                        "frame": rect,
+                    ]
+                }
+                else {
+                    let centerRect : CGPoint = CGPoint(x: rect.origin.x + rect.width/2, y: rect.origin.y + rect.height/2)
+                    let boundingBox : NSRect = calcBoundingBox(centerRect, fontSize, textDisplay)
+                    frameData = [
+                        "id": node.p?.id ?? "",
+                        "backgroundColor": bgColor,
+                        "opacity": opacity,
+                        "text": textDisplay,
+                        "fontSize": fontSize,
+                        "boundingBox": boundingBox,
+                    ]
+                }
+                
                 viewFrames.append(frameData)
 
                 if let children = node.c, index < children.count {
@@ -81,10 +129,18 @@ class QuartzRootView: NSView {
             for rectPosition in rectPositions {
                 let color = NSColor(hexString: rectPosition["backgroundColor"] as! String)
                 color?.setFill()
-                let box = rectPosition["frame"] as! NSRect
-                context.fill(box)
-                let textDisplay = rectPosition["text"] as! String
-                drawQuartzBlackRomanText(context, textDisplay, box)
+
+                if (rectPosition["frame"] != nil) {
+                    let box = rectPosition["frame"] as! NSRect
+                    context.fill(box)
+                }
+                
+                //if rectPosition has key "text"
+                if (rectPosition["text"] != nil) {
+                    let textDisplay : String = rectPosition["text"] as! String
+                    let box = rectPosition["boundingBox"] as! NSRect
+                    drawQuartzBlackRomanText(context, textDisplay, box)
+                }
             }
         }
     }
@@ -164,13 +220,18 @@ class NSLabel: NSTextField {
     }
 }
 
-
-class MyViewController : NSViewController {
+class MyViewController : NSViewController, WebSocketDelegate {
     let textLabel = NSLabel(frame: .init(x: 20, y: 20, width: 200, height: 40))
-    let quartzRootView = QuartzRootView(frame: .init(x: 0, y: 0, width: 400, height: 200))
-    
+    var quartzRootView = QuartzRootView(frame: .init(x: 0, y: 0, width: 400, height: 200))
+    var request : URLRequest? = nil
+    var socket : WebSocket? = nil
     override func loadView() {
         self.view = quartzRootView
+        self.request = URLRequest(url: URL(string: "http://localhost:8080")!)
+        self.request?.timeoutInterval = 5
+        self.socket = WebSocket(request: self.request!)
+        self.socket?.delegate = self
+        self.socket?.connect()
     }
     
     func offsetTopAndLeft(_ view: NSView, _ depth: Int, _ rootCGPoint: CGPoint) -> CGPoint {
@@ -207,7 +268,48 @@ class MyViewController : NSViewController {
                 print("File not found.")
             }
         }
-
     }
-
+    
+    func didReceive(event: Starscream.WebSocketEvent, client: Starscream.WebSocketClient) {
+        switch event {
+            case .connected(_):
+                print("conn")
+            case .disconnected(_, _):
+                print("websocket is disconnected")
+            case .text(let receivedString):
+                DispatchQueue.main.async {
+                    let context = JSContext()
+                    context?.evaluateScript(receivedString)
+                    
+                    if let rootNodeFunction = context?.objectForKeyedSubscript("getRootNode"), let result = rootNodeFunction.call(withArguments: []) {
+                        if let output = result.toString() {
+                            let rootNode = parseJSONStringToSimpleTree(output)
+                            if (rootNode != nil) {
+                                let originalFrame : NSRect = self.quartzRootView.frame
+                                self.quartzRootView = QuartzRootView(frame: .init(x: 0, y: 0, width: originalFrame.width, height: originalFrame.height))
+                                self.view = self.quartzRootView
+                                printTree(rootNode)
+                                self.quartzRootView.setDrawNodeAndRedraw(rootNode!)
+                            }
+                        }
+                    }
+                }
+            case .binary(let data):
+                print("Received data: \(data.count)")
+            case .ping(_):
+                break
+            case .pong(_):
+                break
+            case .viabilityChanged(_):
+                break
+            case .reconnectSuggested(_):
+                break
+            case .cancelled:
+                break
+            case .error(let error):
+                print("error \(error)")
+            case .peerClosed:
+                print("closed")
+            }
+    }
 }

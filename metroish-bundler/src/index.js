@@ -4,26 +4,28 @@ import h from 'virtual-dom/h';
 import toJson from './to-json';
 
 function render()  {
-    let grandChildren = [
-        h('div', { id: '12345', backgroundColor: '#FFB6C1' }),
-        h('div', { id: 'second-grandchild', backgroundColor: '#B0C4DE' }),
+    const grandChildren = [
+        h('div', { id: '1234', backgroundColor: '#EAEAEA' }),
+        h('div', { id: '2222', backgroundColor: '#EAEAEA' }),
     ];
 
-    let children = [
+    const mid = h('text', {text:'The Dog', fontSize: 12});
+
+    const children = [
         h('div', { id: 'first-child', flexDirection: 'row', backgroundColor: '#FFB6C1' }, grandChildren),
-        h('div', { id: 'second-child', backgroundColor: '#B0C4DE' }),
-        h('div', { id: 'third-child', backgroundColor: '#FFDEAD' }),
+        h('div', { id: 'mid-div', backgroundColor: '#EAEAEA'}, mid),
+        h('div', { id: 'third-child', backgroundColor: '#EAEAEA' }),
     ];
 
-    let body = h('body', null, [
+    const body = h('body', null, [
         h('div', {
             id: 'body-div',
-            backgroundColor: '#4F94CD',
+            backgroundColor: '#FAFAFA',
             flexDirection: 'column',
         }, children),
     ])
 
-    return h('div', { id: 'root', backgroundColor: '#FFFFFF' }, body);
+    return h('div', { id: 'root'}, body);
 }
 
 let root = render();

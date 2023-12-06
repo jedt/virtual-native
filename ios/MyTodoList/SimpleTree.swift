@@ -2,28 +2,30 @@ import Foundation
 
 // Define your properties struct
 struct Properties: Codable {
-    var id: String?
-    var className: String?
-    var type: String?
-    var value: Value?
-    var width: Int?
-    var height: Int?
-    var backgroundColor: String?
-    var flexDirection: String?
+    let id: String?
+    let className: String?
+    let type: String?
+    let value: Value?
+    let text: String?
+    let width: Int?
+    let height: Int?
+    let fontSize: Int?
+    let backgroundColor: String?
+    let flexDirection: String?
     
     struct Value: Codable {
-        var value: String?
-        var hook: [String: String]?
+        let value: String?
+        let hook: [String: String]?
     }
 }
 
 // Define your TreeNode struct
 struct TreeNode: Codable {
-    var id: String?
-    var t: String
-    var tn: String?
-    var p: Properties?
-    var c: [TreeNode]?
+    let id: String?
+    let t: String
+    let tn: String?
+    let p: Properties?
+    let c: [TreeNode]?
 }
 
 
