@@ -1,43 +1,39 @@
-const TerserPlugin = require('terser-webpack-plugin');
-const WebpackWebSocketPlugin = require('./src/webpack-plugin');
-const path = require('path');
+const TerserPlugin = require("terser-webpack-plugin");
+const WebpackWebSocketPlugin = require("./src/webpack-plugin");
+const path = require("path");
 
 module.exports = {
   module: {
     rules: [
       {
-        test: /\.(?:js|mjs|cjs)$/,
+        test: /\.(?:js|jsx|mjs|cjs)$/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: [
-              ['@babel/preset-react']
-            ]
-          }
-        }
-      }
-    ]
+            presets: [["@babel/preset-react"]],
+          },
+        },
+      },
+    ],
   },
-  mode: 'production',
-  entry: './src/index.js',
+  mode: "development",
+  entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, './bin'),
-    filename: 'main.js',
+    path: path.resolve(__dirname, "./bin"),
+    filename: "main.js",
   },
-  plugins: [
-    new WebpackWebSocketPlugin()
-  ],
+  plugins: [new WebpackWebSocketPlugin()],
   optimization: {
-      minimize: true,
-      minimizer: [
-          new TerserPlugin({
-              terserOptions: {
-                  format: {
-                      comments: false, // This removes all comments
-                  },
-              },
-              extractComments: false, // This prevents extracting comments to separate files
-          }),
-      ],
+    minimize: false,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          format: {
+            comments: false, // This removes all comments
+          },
+        },
+        extractComments: false, // This prevents extracting comments to separate files
+      }),
+    ],
   },
 };

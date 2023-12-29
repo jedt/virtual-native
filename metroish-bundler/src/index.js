@@ -1,36 +1,88 @@
 'use strict';
 import global from 'global';
 import h from 'virtual-dom/h';
+import h2 from 'hyperscript-helpers';
+import md5 from 'crypto-js/md5';
+
+const { div, plaintext } = h2(h);
 import toJson from './to-json';
 
-function render()  {
-    const grandChildren = [
-        h('div', { id: '1234', backgroundColor: '#EAEAEA' }),
-        h('div', { id: '2222', backgroundColor: '#EAEAEA' }),
-    ];
+const styles = {
+  main: {
+    backgroundColor: '#48D1CC',
+  },
+  container: {
+      backgroundColor: '#EAEAEA',
+  },
+  row1: {
+    flexDirection: 'row',
+    backgroundColor: 'rgba(255,229,182,0.75)',
+  },
+  row2: {
+    backgroundColor: '#FFB611',
+  },
+  row3: {
+    backgroundColor: '#FFB666',
+  },
+  rowWithCol: {
+      flexDirection: 'row',
+      backgroundColor: '#8babb4'
+  },
+  col1: {
+    backgroundColor: '#d8debb',
+  },
+  col2: {
+    backgroundColor: '#6a7679',
+  }
+};
 
-    const mid = h('text', {text:'Lazy Dog 123', fontSize: 12});
+export const addIDsToNode = (node) => {
+  (function traverseNodeAndAddIDs(node) {
+      // Generate a unique ID for this node
+      if (node) {
+        if (Object.hasOwnProperty.call(node, 'properties')) {
+          const objectString = JSON.stringify(node);
+          node.properties.id = md5(objectString).toString();
 
-    const children = [
-        h('div', { id: 'first-child', flexDirection: 'row', backgroundColor: '#FFB6C1' }, grandChildren),
-        h('div', { id: 'mid-div', backgroundColor: '#EAEAEA'}, mid),
-        h('div', { id: 'third-child', backgroundColor: '#EAEAEA' }),
-    ];
+        } else {
+          node.properties = {};
+        }
+      }
 
-    const body = h('body', null, [
-        h('div', {
-            id: 'body-div',
-            backgroundColor: '#FAFAFA',
-            flexDirection: 'column',
-        }, children),
-    ])
+      if (node.children && node.children.length) {
+          node.children.forEach(child => {
+              traverseNodeAndAddIDs(child);
+          });
+      }
+  })(node);
 
-    return h('div', { id: 'root'}, body);
+  return [node, toJson];
+}
+export const beforeRender = (node) => {
+    const [nodeWithIDs] = addIDsToNode(node);
+    return nodeWithIDs;
 }
 
-let root = render();
+export const renderApp = () => {
+    return beforeRender(
+      div('.root', styles.main,
+        div(styles.container, [
+          div(styles.rowWithCol, [
+            div(styles.col1, [
+              plaintext({text:'Number :', fontSize: 12}),
+            ]),
+            div(styles.col1, [
+              plaintext({text:'Value: ', fontSize: 12}),
+            ]),
+          ]),
+        ]),
+      )
+    );
+}
 
-//global.getAllFunctions
-global.getRootNode = function() {
+export const getRootNode = () => {
+    const root = renderApp();
     return JSON.stringify(toJson(root));
 }
+
+global.getRootNode = getRootNode
