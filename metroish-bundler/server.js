@@ -8,9 +8,9 @@ const emitter = new events.EventEmitter();
 emitter.on("publish", (data) => {
   if (data) {
     wss.clients.forEach((client) => {
-      console.log("sending to client", client.readyState);
+      console.log("sending to client");
       if (client.readyState === WebSocket.OPEN) {
-        client.send(data);
+        client.send("fetch");
       }
     });
   }
@@ -57,8 +57,9 @@ wss.on("connection", (ws) => {
     if (message === "emit-compilation") {
       //from webpack to the swift client
       if (parsed && parsed.content) {
-        const compilation = parsed.content;
-        emitter.emit("publish", compilation);
+        const compilationMsg = parsed.content;
+        console.log(compilationMsg);
+        emitter.emit("publish", compilationMsg);
       }
     }
   });

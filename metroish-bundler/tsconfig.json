@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
+    "module": "es6",
+    "target": "ES6",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "moduleResolution": "NodeNext"
+  },
+  "files": [
+    "src/functions.ts"
+  ]
+}
