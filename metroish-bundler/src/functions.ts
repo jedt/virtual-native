@@ -1,76 +1,7 @@
 import { List, Map } from "immutable";
+import * as utils from "./utils";
 
-const tagNameText = "Text";
-
-type NodeMapType = Map<string, any>;
-
-function listize(items: any): List<any> {
-    if (!List.isList(items) && Array.isArray(items)) {
-        return List(items);
-    } else {
-        return items;
-    }
-}
-function defaultNode(node: ArrayLike<any>): NodeMapType {
-    return Map({
-        tagName: "Text",
-        props: Map({}),
-        children: List([node]),
-    });
-}
-
-function mapNotEmpty(node: NodeMapType): boolean {
-    return node?.size > 0;
-}
-
-function hasTextTagEq(node: NodeMapType): boolean {
-    if (mapNotEmpty(node) && node.has("tagName")) {
-        return node.get("tagName") == tagNameText;
-    }
-    return false;
-}
-
-function childrenFromMapNode(node: any): any {
-    if (mapNotEmpty(node) && node.has("children")) {
-        return node.get("children");
-    }
-}
-
-function hasStringAsFirstChildWithTextNode(node: NodeMapType): boolean {
-    if (mapNotEmpty(node) && node.has("children")) {
-        if (hasTextTagEq(node)) {
-            const children = childrenFromMapNode(node);
-            if (typeof children === "string") {
-                return true;
-            }
-        }
-    }
-
-    return false;
-}
 export function fnMap(): any {
-    function createListFromString(children: string): List<NodeMapType> {
-        return List<NodeMapType>([
-            Map({
-                tagName: "Text",
-                props: Map({}),
-                children: children,
-            }),
-        ]);
-    }
-
-    function createListFromArray(
-        children: ArrayLike<NodeMapType>,
-    ): List<NodeMapType> {
-        return List<any>([
-            Map({
-                tagName: "Text",
-                props: Map({}),
-                children: children,
-            }),
-        ]);
-    }
-
     const processListNode = (listNode: any): any => {
         if (!List.isList(listNode)) {
             throw Error(`not a list ${listNode}`);
@@ -82,7 +13,7 @@ export function fnMap(): any {
             } else if (Map.isMap(item)) {
                 return processMapNode(item);
             } else if (Array.isArray(item)) {
-                return processListNode(createListFromArray(item));
+                return processListNode(utils.createListFromArray(item));
             } else if (typeof item === "string") {
                 throw Error(`Unexpected string type of child ${listNode}`);
             } else {
@@ -92,11 +23,11 @@ export function fnMap(): any {
     };
 
     function processMapNode(node: any): any {
-        if (hasStringAsFirstChildWithTextNode(node)) {
+        if (utils.hasStringAsFirstChildWithTextNode(node)) {
             return node;
         } else {
             if (Map.isMap(node)) {
-                const children = childrenFromMapNode(node);
+                const children = utils.childrenFromMapNode(node);
                 if (List.isList(children)) {
                     //process each childrenFromMapNodes using tail recursion
                     return node.set("children", processListNode(children));
@@ -105,7 +36,7 @@ export function fnMap(): any {
                     if (typeof children === "string") {
                         return node.set(
                             "children",
-                            createListFromString(children),
+                            utils.createListFromString(children),
                         );
                     }
                 }
@@ -115,28 +46,17 @@ export function fnMap(): any {
         }
     }
 
-    function isSizeOneArray(children: any): boolean {
-        return Array.isArray(children) && children.length > 0;
-    }
-
-    function isFirstItemString(children: any): boolean {
-        return Array.isArray(children) && typeof children[0] === "string";
-    }
-
-    const shouldChildBeString = (tagName: string, children: any): boolean => {
-        return (
-            tagName === tagNameText &&
-            isSizeOneArray(children) &&
-            isFirstItemString(children)
-        );
-    };
-
     function processChildrenWithTagName(tagName: string, children: any): any {
-        const shouldNode = (tagName: string, item: any) =>
-            typeof item === "string" && tagName !== tagNameText;
+        const shouldString = (tagName: string, item: any) => {
+            if (typeof item === "string" && tagName !== utils.tagNameText) {
+                return true
+            } else {
+                return false
+            }
+        }
 
         const childrenCopy = children.map((item: any) => {
-            if (shouldNode(tagName, item)) {
+            if (shouldString(tagName, item)) {
                 return Map({
                     tagName: "Text",
                     props: Map({}),
@@ -155,7 +75,7 @@ export function fnMap(): any {
         } else if (List.isList(node)) {
             return processListNode(node);
         } else {
-            return defaultNode(node);
+            return utils.defaultNode(node);
         }
     }
 
@@ -165,10 +85,14 @@ export function fnMap(): any {
 
     function h(tagName: string, props: any, ...children: any): any {
         const childrenFn = (tagName: string, children: any): any => {
-            if (shouldChildBeString(tagName, children)) {
+            if (utils.shouldChildBeString(tagName, children)) {
                 return children[0];
             } else {
-                return processChildrenWithTagName(tagName, listize(children));
+                const listized = utils.listize(children);
+                return processChildrenWithTagName(
+                    tagName,
+                    listized,
+                );
             }
         };
         return Map({
@@ -179,13 +103,15 @@ export function fnMap(): any {
     }
 
     return {
-        shouldChildBeString,
+        listize: utils.listize,
+        shouldChildBeString: utils.shouldChildBeString,
         h,
         ht,
         processListNode,
         processMapNode,
-        hasStringAsFirstChildWithTextNode,
-        hasTextTagEq,
+        hasStringAsFirstChildWithTextNode:
+            utils.hasStringAsFirstChildWithTextNode,
+        hasTextTagEq: utils.hasTextTagEq,
     };
 }
 function listToXML(node: any): string {
@@ -206,7 +132,7 @@ function listToXML(node: any): string {
 
 export function mapToXML(node: any): string {
     // Handling text nodes
-    if (hasStringAsFirstChildWithTextNode(node)) {
+    if (utils.hasStringAsFirstChildWithTextNode(node)) {
         const childNodeText = node.get("children");
         const tagName = node.get("tagName");
         let xmlStringTextView = `<${tagName}`;
