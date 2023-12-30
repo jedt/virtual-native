@@ -58,6 +58,81 @@ describe("FunctionsTests", () => {
         ).toBeFalsy();
         done();
     });
+    it("shouldHandleSingleNode_Text", (done) => {
+        const { h } = fn.fnMap();
+        const testNode = h("Text", Map({}), "hello");
+        expect(testNode).toEqual(
+            Map({
+                tagName: "Text",
+                props: Map({}),
+                children: "hello",
+            }),
+        );
+        done();
+    });
+    it("shouldNotListize_Lists", (done) => {
+        const listNode = List([
+            Map({
+                tagName: "Text",
+                props: Map({}),
+                children: "hello",
+            }),
+            Map({
+                tagName: "Text",
+                props: Map({}),
+                children: "world",
+            }),
+        ]);
+        const listized = fn.fnMap().listize(listNode);
+        expect(listized.size).toEqual(2);
+        expect(listized.get(0)).toEqual(
+            Map({
+                tagName: "Text",
+                props: Map({}),
+                children: "hello",
+            }),
+        );
+        expect(listized.get(1)).toEqual(
+            Map({
+                tagName: "Text",
+                props: Map({}),
+                children: "world",
+            }),
+        );
+        done();
+    });
+    it("shouldListize_ArraysPrimitive", (done) => {
+        const listized = fn.fnMap().listize(["hi"]);
+        expect(listized.size).toEqual(1);
+        expect(listized.get(0)).toEqual("hi");
+        done();
+    });
+
+    it("shouldListize_Arrays", (done) => {
+        const listNode = [
+            Map({
+                tagName: "Text",
+                props: Map({}),
+                children: "hello",
+            }),
+        ];
+        const listized = fn.fnMap().listize(listNode);
+        expect(listized.size).toEqual(1);
+        expect(listized.get(0)).toEqual(
+            Map({
+                tagName: "Text",
+                props: Map({}),
+                children: "hello",
+            }),
+        );
+        done();
+    });
+    it("shouldProcessChildren_Array", (done) => {
+        const { h } = fn.fnMap();
+        const testNode = h("span", Map({}), ["hello"]);
+        expect(Map.isMap(testNode)).toBeTruthy();
+        done();
+    });
     it("shouldProcessChildren_ListNode", (done) => {
         const { processListNode } = fn.fnMap();
         const listNode = List([
@@ -380,6 +455,20 @@ describe("FunctionsTests", () => {
 
         const output = fn.mapToXML(testNode);
         expect(output).toEqual("<Text>Hello</Text>");
+        done();
+    });
+
+    it("shouldCreateElement_BodyWithLists", (done) => {
+        const { ht } = fn.fnMap();
+        const testNode = ht(
+            "body",
+            List([ht("View", "Hello, "), ht("View", "World")]),
+        );
+
+        const output = fn.mapToXML(testNode);
+        expect(output).toEqual(
+            "<body><View><Text>Hello, </Text></View><View><Text>World</Text></View></body>",
+        );
         done();
     });
 });
