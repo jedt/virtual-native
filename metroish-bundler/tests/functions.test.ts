@@ -127,12 +127,14 @@ describe("FunctionsTests", () => {
         );
         done();
     });
+
     it("shouldProcessChildren_Array", (done) => {
         const { h } = fn.fnMap();
         const testNode = h("span", Map({}), ["hello"]);
         expect(Map.isMap(testNode)).toBeTruthy();
         done();
     });
+
     it("shouldProcessChildren_ListNode", (done) => {
         const { processListNode } = fn.fnMap();
         const listNode = List([
@@ -167,15 +169,19 @@ describe("FunctionsTests", () => {
         done();
     });
     it("shouldChildBeString_True", (done) => {
-        const { shouldChildBeString } = fn.fnMap();
-        const actual = shouldChildBeString("Text", ["hello"]);
+        const { shouldChildBeStringAndNotCreateNewNode } = fn.fnMap();
+        const actual = shouldChildBeStringAndNotCreateNewNode("Text", [
+            "hello",
+        ]);
         expect(actual).toBeTruthy();
         done();
     });
 
     it("shouldChildBeString_False", (done) => {
-        const { shouldChildBeString } = fn.fnMap();
-        const actual = shouldChildBeString("span", ["hello"]);
+        const { shouldChildBeStringAndNotCreateNewNode } = fn.fnMap();
+        const actual = shouldChildBeStringAndNotCreateNewNode("span", [
+            "hello",
+        ]);
         expect(actual).toBeFalsy();
         done();
     });
@@ -377,11 +383,10 @@ describe("FunctionsTests", () => {
 
     it("shouldHandleChildren_singleNodeWithListNode", (done) => {
         const { h } = fn.fnMap();
-        const listNode = h(
-            "body",
-            Map({}),
-            List([h("Text", Map({}), "hello"), h("Text", Map({}), "world")]),
-        );
+        const listNode = h("body", Map({}), [
+            h("Text", Map({}), "hello"),
+            h("Text", Map({}), "world"),
+        ]);
         const children = listNode.get("children");
         expect(children.size).toEqual(1);
         const items = children.get(0);

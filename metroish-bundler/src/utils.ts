@@ -16,6 +16,13 @@ export function defaultNode(node: ArrayLike<any>): NodeMapType {
         children: List([node]),
     });
 }
+export function createTextMapNodeFromString(str: string): NodeMapType {
+    return Map({
+        tagName: "Text",
+        props: Map({}),
+        children: str,
+    });
+}
 
 export function mapNotEmpty(node: NodeMapType): boolean {
     return node?.size > 0;
@@ -73,10 +80,13 @@ export function isFirstItemString(children: any): boolean {
     return Array.isArray(children) && typeof children[0] === "string";
 }
 
-export function shouldChildBeString(tagName: string, children: ArrayLike<any>): boolean {
+export function shouldChildBeStringAndNotCreateNewNode(
+    tagName: string,
+    children: ArrayLike<any>,
+): boolean {
     if (tagName === tagNameText && isSizeOneArray(children)) {
         return isFirstItemString(children);
     }
 
-    return false
+    return false;
 }

@@ -15,7 +15,7 @@ export function fnMap(): any {
             } else if (Array.isArray(item)) {
                 return processListNode(utils.createListFromArray(item));
             } else if (typeof item === "string") {
-                throw Error(`Unexpected string type of child ${listNode}`);
+                return utils.createTextMapNodeFromString(item);
             } else {
                 throw Error(`Unexpected string type of child ${listNode}`);
             }
@@ -47,23 +47,22 @@ export function fnMap(): any {
     }
 
     function processChildrenWithTagName(tagName: string, children: any): any {
-        const shouldString = (tagName: string, item: any) => {
+        const shouldCreateTextNodeBecauseTagNameIsNotText = (
+            tagName: string,
+            item: any,
+        ) => {
             if (typeof item === "string" && tagName !== utils.tagNameText) {
-                return true
+                return true;
             } else {
-                return false
+                return false;
             }
-        }
+        };
 
         const childrenCopy = children.map((item: any) => {
-            if (shouldString(tagName, item)) {
-                return Map({
-                    tagName: "Text",
-                    props: Map({}),
-                    children: item,
-                });
+            if (shouldCreateTextNodeBecauseTagNameIsNotText(tagName, item)) {
+                return utils.createTextMapNodeFromString(item);
             } else {
-                return item;
+                return utils.listize(item);
             }
         });
         return processChildren(childrenCopy);
@@ -85,14 +84,13 @@ export function fnMap(): any {
 
     function h(tagName: string, props: any, ...children: any): any {
         const childrenFn = (tagName: string, children: any): any => {
-            if (utils.shouldChildBeString(tagName, children)) {
+            if (
+                utils.shouldChildBeStringAndNotCreateNewNode(tagName, children)
+            ) {
                 return children[0];
             } else {
                 const listized = utils.listize(children);
-                return processChildrenWithTagName(
-                    tagName,
-                    listized,
-                );
+                return processChildrenWithTagName(tagName, listized);
             }
         };
         return Map({
@@ -104,7 +102,8 @@ export function fnMap(): any {
 
     return {
         listize: utils.listize,
-        shouldChildBeString: utils.shouldChildBeString,
+        shouldChildBeStringAndNotCreateNewNode:
+            utils.shouldChildBeStringAndNotCreateNewNode,
         h,
         ht,
         processListNode,
