@@ -1,7 +1,7 @@
 "use strict";
 import * as fn from "./functions";
 
-export const renderApp = () => {
+const renderApp = () => {
     const { h, ht } = fn.fnMap();
     return fn.mapToXML(
         h("body", {}, [
@@ -12,9 +12,9 @@ export const renderApp = () => {
     );
 };
 
-const getRootNode = () => {
+export const getRootNode = () => {
     const root = renderApp();
-    return root;
+    return JSON.stringify(root);
 };
 
-console.log(getRootNode());
+global.getRootNode = getRootNode;

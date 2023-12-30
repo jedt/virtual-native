@@ -10,6 +10,8 @@
     "moduleResolution": "NodeNext"
   },
   "files": [
+    "src/global.d.ts",
+    "src/app.ts",
     "src/functions.ts"
   ]
 }
