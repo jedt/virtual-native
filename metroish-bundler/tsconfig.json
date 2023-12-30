@@ -3,7 +3,7 @@
     "alwaysStrict": true,
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
-    "module": "es6",
+    "module": "NodeNext",
     "target": "ES6",
     "esModuleInterop": true,
     "allowJs": true,
