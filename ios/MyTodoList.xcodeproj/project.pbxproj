@@ -13,9 +13,12 @@
 		8448CB772B186EE4006102D1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8448CB752B186EE4006102D1 /* MainMenu.xib */; };
 		8448CB7F2B187092006102D1 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8448CB7E2B187092006102D1 /* MyViewController.swift */; };
 		845EADA72B18B7DA0060F262 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 845EADA62B18B7DA0060F262 /* JavaScriptCore.framework */; };
+		846A18302B416B4500B05FDC /* WSClientSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846A182F2B416B4500B05FDC /* WSClientSocket.swift */; };
+		846A18312B416B4500B05FDC /* WSClientSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846A182F2B416B4500B05FDC /* WSClientSocket.swift */; };
 		84895A9E2B1C663E00829F0C /* MyTodoListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84895A9D2B1C663E00829F0C /* MyTodoListTests.swift */; };
 		849730832B1C5DC900189F64 /* SimpleTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849730822B1C5DC900189F64 /* SimpleTree.swift */; };
 		84C1B0412B1B2F9C00A4AAF6 /* bundle.js in Resources */ = {isa = PBXBuildFile; fileRef = 84C1B0402B1B2F9B00A4AAF6 /* bundle.js */; };
+		84D539E02B414B420062060E /* functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D539DF2B414B420062060E /* functions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,11 +41,14 @@
 		8448CB782B186EE4006102D1 /* MyTodoList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyTodoList.entitlements; sourceTree = "<group>"; };
 		8448CB7E2B187092006102D1 /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
 		845EADA62B18B7DA0060F262 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		846A182E2B41691B00B05FDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		846A182F2B416B4500B05FDC /* WSClientSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSClientSocket.swift; sourceTree = "<group>"; };
 		84895A9B2B1C663E00829F0C /* MyTodoListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyTodoListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84895A9D2B1C663E00829F0C /* MyTodoListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTodoListTests.swift; sourceTree = "<group>"; };
 		8497307B2B1C5D7100189F64 /* MyTodoListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTodoListTests.swift; sourceTree = "<group>"; };
 		849730822B1C5DC900189F64 /* SimpleTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTree.swift; sourceTree = "<group>"; };
 		84C1B0402B1B2F9B00A4AAF6 /* bundle.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bundle.js; sourceTree = "<group>"; };
+		84D539DF2B414B420062060E /* functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = functions.swift; sourceTree = "<group>"; };
 		BD1737A54DC0A1E02626E71D /* Pods-MyTodoList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTodoList.debug.xcconfig"; path = "Target Support Files/Pods-MyTodoList/Pods-MyTodoList.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +105,8 @@
 		8448CB702B186EE3006102D1 /* MyTodoList */ = {
 			isa = PBXGroup;
 			children = (
+				846A182E2B41691B00B05FDC /* Info.plist */,
+				84D539DF2B414B420062060E /* functions.swift */,
 				84C1B0402B1B2F9B00A4AAF6 /* bundle.js */,
 				8448CB7E2B187092006102D1 /* MyViewController.swift */,
 				8448CB712B186EE3006102D1 /* AppDelegate.swift */,
@@ -106,6 +114,7 @@
 				8448CB752B186EE4006102D1 /* MainMenu.xib */,
 				8448CB782B186EE4006102D1 /* MyTodoList.entitlements */,
 				849730822B1C5DC900189F64 /* SimpleTree.swift */,
+				846A182F2B416B4500B05FDC /* WSClientSocket.swift */,
 			);
 			path = MyTodoList;
 			sourceTree = "<group>";
@@ -300,7 +309,9 @@
 			files = (
 				8448CB7F2B187092006102D1 /* MyViewController.swift in Sources */,
 				8448CB722B186EE3006102D1 /* AppDelegate.swift in Sources */,
+				846A18302B416B4500B05FDC /* WSClientSocket.swift in Sources */,
 				849730832B1C5DC900189F64 /* SimpleTree.swift in Sources */,
+				84D539E02B414B420062060E /* functions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84895A9E2B1C663E00829F0C /* MyTodoListTests.swift in Sources */,
+				846A18312B416B4500B05FDC /* WSClientSocket.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,6 +482,7 @@
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/SocketRocket/SocketRocket.framework/Headers\"",
 				);
+				INFOPLIST_FILE = MyTodoList/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainNibFile = MainMenu;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -499,6 +512,7 @@
 				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyTodoList/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainNibFile = MainMenu;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;

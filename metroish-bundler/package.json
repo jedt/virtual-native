@@ -39,6 +39,9 @@
   "dependencies": {
     "@babel/plugin-transform-react-jsx": "^7.23.4",
     "@babel/preset-react": "^7.23.3",
+    "@types/node": "^20.10.6",
+    "@types/webpack": "^5.28.5",
+    "@types/ws": "^8.5.10",
     "crypto-js": "^4.2.0",
     "global": "^4.4.0",
     "hermes-eslint": "^0.18.2",
@@ -53,6 +56,6 @@
     "ramda": "^0.29.1",
     "source-map-loader": "^4.0.2",
     "virtual-dom": "^2.1.1",
-    "ws": "^8.14.2"
+    "ws": "^8.16.0"
   }
 }

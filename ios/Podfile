@@ -6,4 +6,5 @@ target 'MyTodoList' do
   use_frameworks!
 
   pod 'Starscream'
+  pod 'Swifter'
 end

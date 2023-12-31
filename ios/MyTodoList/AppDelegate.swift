@@ -28,7 +28,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        createWindow()
+//        createWindow()
+        startServer()
+//        connectToBundler()
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {

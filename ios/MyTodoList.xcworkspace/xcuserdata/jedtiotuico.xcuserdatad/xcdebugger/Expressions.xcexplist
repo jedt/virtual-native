@@ -3,6 +3,17 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "WSClientSocket.connectToBundler():WSClientSocket.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "socket">
+            </PersistentString>
+            <PersistentString
+               value = "socket.connect()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "buildTree #1 (_:containerFrame:depth:) in QuartzRootView.buildViewTree(from:):MyViewController.swift">
       </ContextState>
       <ContextState
