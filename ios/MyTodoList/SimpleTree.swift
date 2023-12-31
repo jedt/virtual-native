@@ -12,7 +12,7 @@ struct Properties: Codable {
     let fontSize: Int?
     let backgroundColor: String?
     let flexDirection: String?
-    
+    let opacity: Double?
     struct Value: Codable {
         let value: String?
         let hook: [String: String]?

@@ -3,10 +3,10 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "MyViewController.buildViewTree(from:):MyViewController.swift">
+         contextName = "buildTree #1 (_:containerFrame:depth:) in QuartzRootView.buildViewTree(from:):MyViewController.swift">
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #1 in MyViewController.buildViewTree(from:):MyViewController.swift">
+         contextName = "MyViewController.buildViewTree(from:):MyViewController.swift">
       </ContextState>
       <ContextState
          contextName = "parseJSONStringToSimpleTree(_:):SimpleTree.swift">
@@ -15,13 +15,27 @@
          contextName = "MyTodoListTests.testParseValidJsonLarge():MyTodoListTests.swift">
       </ContextState>
       <ContextState
-         contextName = "MyViewController.loadView():MyViewController.swift">
-      </ContextState>
-      <ContextState
          contextName = "MyViewController.createViewFromTreeNode(_:):MyViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "node">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "QuartzRootView.calcBoundingBox(_:_:_:):MyViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in MyViewController.buildViewTree(from:):MyViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MyViewController.loadView():MyViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "TreeViewLayout.calcBoundingBox(origin:fontSize:textDisplay:):MyViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "textDisplay">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
