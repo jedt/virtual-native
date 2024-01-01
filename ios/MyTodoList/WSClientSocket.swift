@@ -8,50 +8,51 @@
 import Foundation
 import Starscream
 
-class WSClientSocket : NSObject, WebSocketDelegate {
-    var request : URLRequest? = nil
-    var socket : WebSocket? = nil
-    
+class WSClientSocket: NSObject, WebSocketDelegate {
+    var request: URLRequest? = nil
+    var socket: WebSocket? = nil
+
     func connectToBundler() {
         print("fetching...")
-        self.request = URLRequest(url: URL(string: "ws://localhost:8080/websocket")!)
-        self.request?.timeoutInterval = 5
-        self.socket = WebSocket(request: self.request!)
-        self.socket?.delegate = self
-        self.socket?.connect()
+        request = URLRequest(url: URL(string: "ws://localhost:8080/websocket")!)
+        request?.timeoutInterval = 5
+        socket = WebSocket(request: request!)
+        socket?.delegate = self
+
+        socket?.connect()
     }
-    
+
     func disconnect() {
-        self.socket?.disconnect()
+        socket?.disconnect()
     }
-    
-    func didReceive(event: Starscream.WebSocketEvent, client: Starscream.WebSocketClient) {
+
+    func didReceive(event: Starscream.WebSocketEvent, client _: Starscream.WebSocketClient) {
         switch event {
-        case .connected(let headers):
+        case let .connected(headers):
             isConnected = true
             print("websocket is connected: \(headers)")
-        case .disconnected(let reason, let code):
+        case let .disconnected(reason, code):
             isConnected = false
             print("websocket is disconnected: \(reason) with code: \(code)")
-        case .text(let string):
+        case let .text(string):
             print("Received text: \(string)")
-        case .binary(let data):
+        case let .binary(data):
             print("Received data: \(data.count)")
-        case .ping(_):
+        case .ping:
             break
-        case .pong(_):
+        case .pong:
             break
-        case .viabilityChanged(_):
+        case .viabilityChanged:
             break
-        case .reconnectSuggested(_):
+        case .reconnectSuggested:
             break
         case .cancelled:
             isConnected = false
-        case .error(let error):
+        case let .error(error):
             isConnected = false
             print(error!)
-            case .peerClosed:
-                   break
+        case .peerClosed:
+            break
         }
     }
 }
