@@ -1,5 +1,4 @@
 metroish-bundler/node_modules/
 metroish-bundler/bin/main.js
 ios/MyTodoList/bundle.js
-ios/Pods
-ios/Podfile.lock
+macos/Pods/
