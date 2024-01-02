@@ -6,7 +6,6 @@ const renderApp = () => {
     return h("body", {}, [
         h("div", {}, ht("View", "Hello, ")),
         h("div", {}, ht("View", "world!!")),
-        h("div", {}, h("div", {}, [ht("div", "foo"), ht("div", "bar")])),
     ]);
 };
 

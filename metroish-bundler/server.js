@@ -48,7 +48,7 @@ server.on("upgrade", function upgrade(request, socket, head) {
         });
     } else if (request.url === "/webpack") {
         wss.handleUpgrade(request, socket, head, function done(ws) {
-            wss.emit("webpack_connection", ws, request);
+            wss.emit("webpack-connection", ws, request);
         });
     } else {
         socket.destroy();
@@ -107,8 +107,6 @@ server.listen(8080, () => {
     startWebpack();
 });
 
-//
-// const wss = new WebSocket.Server({ port: 8080 });
 const emitter = new events.EventEmitter();
 
 emitter.on("publish", (data) => {
@@ -121,60 +119,9 @@ emitter.on("publish", (data) => {
         });
     }
 });
-//
-// wss.on("listening", () => {
-//     console.log("WebSocket server listening on ws://localhost:8080");
-//     function startWebpack() {
-//         const compiler = webpack({
-//             entry: "./src/app.ts",
-//             output: {
-//                 path: path.resolve(__dirname, "dist"),
-//             },
-//             plugins: [
-//                 // Add your plugins here
-//                 // Learn more about plugins from https://webpack.js.org/configuration/plugins/
-//             ],
-//             module: {
-//                 rules: [
-//                     {
-//                         test: /\.(ts|tsx)$/i,
-//                         loader: "ts-loader",
-//                         exclude: ["/node_modules/"],
-//                     },
-//                     {
-//                         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-//                         type: "asset",
-//                     },
-//
-//                     // Add your rules for custom modules here
-//                     // Learn more about loaders from https://webpack.js.org/loaders/
-//                 ],
-//             },
-//             resolve: {
-//                 extensions: [".tsx", ".ts", ".jsx", ".js", "..."],
-//             },
-//         });
-//         compiler.watch(
-//             {
-//                 aggregateTimeout: 300,
-//                 poll: undefined,
-//             },
-//             (err) => {
-//                 if (err) {
-//                     console.error(err);
-//                 }
-//
-//                 // Access the compilation object directly
-//             },
-//         );
-//     }
-//
-//     startWebpack();
-// });
-//
-wss.on("webpack_connection", (ws, req) => {
+wss.on("webpack-connection", (ws, req) => {
     const ip = req.socket.remoteAddress;
-    console.log(`connection event ${ip}`);
+    console.log(`webpack-connection event ${ip}`);
     ws.on("message", (data) => {
         const parsedFromData = (data, isBinary) => {
             try {

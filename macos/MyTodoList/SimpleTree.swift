@@ -28,7 +28,6 @@ struct TreeNode: Codable {
     let c: [TreeNode]?
 }
 
-
 func parseJSONStringToSimpleTree(_ jsonString: String) -> TreeNode? {
     let jsonData = Data(jsonString.utf8)
     let decoder = JSONDecoder()

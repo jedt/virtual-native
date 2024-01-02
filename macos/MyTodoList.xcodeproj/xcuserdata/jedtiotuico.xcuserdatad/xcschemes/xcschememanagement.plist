@@ -4,14 +4,24 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>FunctionsTest.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
 		<key>MyTodoList.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>0</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>841B17672B4313B700175067</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>8448CB6D2B186EE3006102D1</key>
 		<dict>
 			<key>primary</key>

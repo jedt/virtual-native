@@ -1,0 +1,36 @@
+PODS:
+  - CwlCatchException (2.1.2):
+    - CwlCatchExceptionSupport (~> 2.1.2)
+  - CwlCatchExceptionSupport (2.1.2)
+  - CwlMachBadInstructionHandler (2.1.2)
+  - Nimble (13.1.1):
+    - CwlCatchException (~> 2.1.0)
+    - CwlMachBadInstructionHandler (~> 2.1.0)
+  - Starscream (4.0.6)
+  - Swifter (1.5.0)
+
+DEPENDENCIES:
+  - Nimble
+  - Starscream
+  - Swifter
+
+SPEC REPOS:
+  trunk:
+    - CwlCatchException
+    - CwlCatchExceptionSupport
+    - CwlMachBadInstructionHandler
+    - Nimble
+    - Starscream
+    - Swifter
+
+SPEC CHECKSUMS:
+  CwlCatchException: 76542d5ea479c79ce16ddd6e7bc9d42c7ec63300
+  CwlCatchExceptionSupport: 42bf8c5e4e5e663f51100ddfa68caf7cfcf64ab6
+  CwlMachBadInstructionHandler: b982c7e3e44fcfa1c680e8046f6bba35f3476d65
+  Nimble: b50983fc2f1cc8ce5a718a8c2de4e82ba9930cc5
+  Starscream: fb2c4510bebf908c62bd383bcf05e673720e91fd
+  Swifter: e71dd674404923d7f03ebb03f3f222d1c570bc8e
+
+PODFILE CHECKSUM: 738291443d79a1e0f7ef8563f51030d356a9ee6c
+
+COCOAPODS: 1.14.3

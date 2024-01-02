@@ -5,22 +5,6 @@
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
-      <BuildActionEntries>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8448CB6D2B186EE3006102D1"
-               BuildableName = "MyTodoList.app"
-               BlueprintName = "MyTodoList"
-               ReferencedContainer = "container:MyTodoList.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-      </BuildActionEntries>
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
@@ -34,9 +18,9 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "84895A9A2B1C663E00829F0C"
-               BuildableName = "MyTodoListTests.xctest"
-               BlueprintName = "MyTodoListTests"
+               BlueprintIdentifier = "841B17672B4313B700175067"
+               BuildableName = "FunctionsTest.xctest"
+               BlueprintName = "FunctionsTest"
                ReferencedContainer = "container:MyTodoList.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -51,9 +35,7 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES"
-      consoleMode = "0"
-      structuredConsoleMode = "1">
+      allowLocationSimulation = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
@@ -71,8 +53,7 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8448CB6D2B186EE3006102D1"
@@ -80,7 +61,7 @@
             BlueprintName = "MyTodoList"
             ReferencedContainer = "container:MyTodoList.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

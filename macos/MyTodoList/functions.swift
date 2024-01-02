@@ -16,8 +16,110 @@ let context = JSContext()
 var isConnected = false
 let socketDelegate = WSClientSocket()
 let server = HttpServer()
-let localPath = "/Users/jedtiotuico/swift/vdom-native/ios/MyTodoList/main.bundle.js"
+let localPath = "/Users/jedtiotuico/swift/vdom-native/macos/MyTodoList/main.bundle.js"
 let urlString = "http://127.0.0.1:8080/download"
+
+struct Props: Codable {
+}
+
+enum NodeChildren: Codable {
+    case nodes([TNode])
+    case text(String)
+    case nestedNodes([[TNode]])
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let text = try? container.decode(String.self) {
+            self = .text(text)
+            return
+        }
+        if let nodes = try? container.decode([TNode].self) {
+            self = .nodes(nodes)
+            return
+        }
+        if let nestedNodes = try? container.decode([[TNode]].self) {
+            self = .nestedNodes(nestedNodes)
+            return
+        }
+        throw DecodingError.typeMismatch(
+            NodeChildren.self,
+            DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Unable to decode NodeChildren")
+        )
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+            case .nodes(let nodes):
+                try container.encode(nodes)
+            case .text(let text):
+                try container.encode(text)
+            case .nestedNodes(let nestedNodes):
+                try container.encode(nestedNodes)
+        }
+    }
+}
+
+struct TNode: Codable {
+    let tagName: String
+    let props: Props
+    let children: NodeChildren
+}
+
+func parseJSONStringToTree(_ jsonString: String) -> TNode? {
+    let jsonData = Data(jsonString.utf8)
+    let decoder = JSONDecoder()
+
+    do {
+        let rootNode = try decoder.decode(TNode.self, from: jsonData)
+        return rootNode
+    } catch {
+        print("Error parsing JSON: \(error)")
+        return nil
+    }
+}
+
+func getTreeStringArray(_ node: TNode?, indent: String = "", isTail: Bool = true) -> [String] {
+    guard let node = node else { return [] }
+
+    var lines: [String] = []
+
+    // current node
+    let tailStr = isTail ? "└─" : "├─"
+    lines.append("\(indent)\(tailStr) type: \(node.tagName), props: \(node.props)")
+
+    // Update indentation
+    let childIndent = indent + (isTail ? "  " : "| ")
+
+    switch node.children {
+        case .text(let text):
+            lines.append("\(childIndent)└─ text: \(text)")
+
+        case .nodes(let children):
+            for (index, child) in children.enumerated() {
+                let childLines = getTreeStringArray(child, indent: childIndent, isTail: index == children.count - 1)
+                lines.append(contentsOf: childLines)
+            }
+
+        case .nestedNodes(let nestedChildren):
+            for (nestedIndex, nested) in nestedChildren.enumerated() {
+                let lastNested = nestedIndex == nestedChildren.count - 1
+                for (index, child) in nested.enumerated() {
+                    let childLines = getTreeStringArray(child, indent: childIndent, isTail: lastNested && index == nested.count - 1)
+                    lines.append(contentsOf: childLines)
+                }
+            }
+    }
+
+    return lines
+}
+
+func printTree(_ node: TNode?, indent: String = "", isTail: Bool = true) {
+    let lines : [String] = getTreeStringArray(node, indent: indent, isTail: isTail);
+    for line in lines {
+        print(line)
+    }
+}
 
 func evalJS(_ receivedString: String) -> String {
     let output_value: JSValue = (context?.evaluateScript(receivedString))!
@@ -35,8 +137,6 @@ func EVAL(_ str: String) -> String {
         case "fetch":
             socketDelegate.connectToBundler()
         case "download":
-            let fileURL = URL(string: urlString)!
-            let destinationURL = URL(fileURLWithPath: localPath)
             downloadFile(from: urlString, to: localPath) { fileContents, error in
                 if let error {
                     print("Download failed: \(error)")
@@ -68,6 +168,7 @@ func EVAL(_ str: String) -> String {
 }
 
 func PRINT(_ exp: String) -> String {
+    print(exp)
     return exp
 }
 
