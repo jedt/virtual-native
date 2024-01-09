@@ -2,6 +2,8 @@
 
 Very WIP - Create macos native apps using Typescript. Construct a virtual DOM in typescript and see it render it in macos as NSViews. I would like to hear your thoughts, submit an issue
 
+![screenshot](https://github.com/jedt/virtual-native/blob/main/screenshot.png?raw=true)
+
 This is a small project to deconstruct the react native infrastructure.
 
 Example code:
