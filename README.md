@@ -1,37 +1,61 @@
 # virtual-native
-Create native apps in macOS using Javascript virtual DOM
 
-This is a small project to deconstruct the react native infrastructure. Removing react from react-native and only using a virtual dom
+Very WIP - Create macos native apps using Typescript. Construct a virtual DOM in typescript and see it render it in macos as NSViews. I would like to hear your thoughts, submit an issue
+
+This is a small project to deconstruct the react native infrastructure.
 
 Example code:
+
 ```
-import h from 'virtual-dom/h';
+"use strict";
+import * as fn from "./functions";
 
-function render()  {
-    let body = h('body', null, [
-        h('div', { id: 'foo' }, 'Hello!'),
-        h('div', { id: 'bar' }, 'World!')
-    ])
+const renderApp = () => {
+    const { h, ht } = fn.fnMap();
+    return h("bodyOfTwo", {}, [
+        h("divTargetLeft", {}, ht("View", "TargetLeft")),
+        h(
+            "divTarget",
+            {},
+            h("View", {}, [
+                ht("View", "Sibling two"),
+                ht("View", "Sibling one"),
+            ]),
+        ),
+        h("divTargetRight", {}, ht("View", "TargetRight")),
+    ]);
+};
 
-    return h('div', { id: 'root' }, body);
-}
-
-let root = render();
-
-//global.getAllFunctions
-global.getRootNode = function() {
+export const getRootNode = () => {
+    const root = renderApp();
     return JSON.stringify(root);
-}
+};
+
+global.getRootNode = getRootNode;
+
 ```
 
 ## Requirements:
-* XCode
-* node
+
+- XCode
+- node
 
 ## Instructions
-* Fork this repo
-* run npm install on the `metroish-bundler` folder
-* then npm start
-* run pod install on the `ios` folder
-* open ios/MyTodoList.xcworkspace and build
 
+- Fork this repo
+- run npm install on the `metroish-bundler` folder
+- then npm start
+- run pod install on the `ios` folder
+- open ios/MyTodoList.xcworkspace and build
+
+## Run the metroish-bundler
+
+- cd metroish-bundler
+- npm start
+
+## Run the macos app
+
+- open MyTodoList.xcworkspace in XCode
+- Build and Run
+- it should listen for changes via websockets from the metroish-bundler (webpack)
+- try changing src/app.ts and see the results
