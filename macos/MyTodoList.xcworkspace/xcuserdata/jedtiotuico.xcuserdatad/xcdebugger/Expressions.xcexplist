@@ -3,27 +3,7 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "WSClientSocket.connectToBundler():WSClientSocket.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "socket">
-            </PersistentString>
-            <PersistentString
-               value = "socket.connect()">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "buildTree #1 (_:containerFrame:depth:) in QuartzRootView.buildViewTree(from:):MyViewController.swift">
-      </ContextState>
-      <ContextState
-         contextName = "MyViewController.buildViewTree(from:):MyViewController.swift">
-      </ContextState>
-      <ContextState
          contextName = "parseJSONStringToSimpleTree(_:):SimpleTree.swift">
-      </ContextState>
-      <ContextState
-         contextName = "MyTodoListTests.testParseValidJsonLarge():MyTodoListTests.swift">
       </ContextState>
       <ContextState
          contextName = "MyViewController.createViewFromTreeNode(_:):MyViewController.swift">
@@ -34,13 +14,46 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "QuartzRootView.calcBoundingBox(_:_:_:):MyViewController.swift">
+         contextName = "FunctionsTest.testSimpleNode():FunctionsTest.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "map[&quot;children&quot;]">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #1 in MyViewController.buildViewTree(from:):MyViewController.swift">
+         contextName = "updateNodeLayoutImmutable(withPadding:node:parent:siblingIndex:siblingCount:):functions.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(layoutRect)">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "MyViewController.loadView():MyViewController.swift">
+         contextName = "createView(from:):functions.swift">
+      </ContextState>
+      <ContextState
+         contextName = "calculateLayout(origin:size:currentNode:parent:siblingIndex:siblingCount:):functions.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentNode[&quot;children&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FunctionsTest.testTwoChildren():FunctionsTest.swift">
+      </ContextState>
+      <ContextState
+         contextName = "buildTree #1 (_:containerFrame:depth:) in QuartzRootView.buildViewTree(from:):MyViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MyViewController.buildViewTree(from:):MyViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "FunctionsTest.testCalculateLayout():FunctionsTest.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in FunctionsTest.testTraverseTreeFnBreadthFirst():FunctionsTest.swift">
       </ContextState>
       <ContextState
          contextName = "TreeViewLayout.calcBoundingBox(origin:fontSize:textDisplay:):MyViewController.swift">
@@ -49,6 +62,49 @@
                value = "textDisplay">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "QuartzRootView.calcBoundingBox(_:_:_:):MyViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in MyViewController.buildViewTree(from:):MyViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "updateNodeLayout(withPadding:node:parent:siblingIndex:siblingCount:):functions.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "updatedNode[&quot;props&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in MyViewController.viewDidLoad():MyViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MyTodoListTests.testParseValidJsonLarge():MyTodoListTests.swift">
+      </ContextState>
+      <ContextState
+         contextName = "FunctionsTest.testUpdateLayoutRectPropsDictionary():FunctionsTest.swift">
+      </ContextState>
+      <ContextState
+         contextName = "TNode.assignUniqueIds():functions.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MyViewController.loadView():MyViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "WSClientSocket.connectToBundler():WSClientSocket.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "socket.connect()">
+            </PersistentString>
+            <PersistentString
+               value = "socket">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FunctionsTest.testSimpleNodeDictionary():FunctionsTest.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

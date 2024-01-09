@@ -1,0 +1,316 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"js",
+				"JSHint"
+			],
+			[
+				"jsh",
+				"JSHint"
+			],
+			[
+				"jshin",
+				"JSHint"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"esl",
+				"ESLint"
+			],
+			[
+				"inst",
+				"Build: New Build System"
+			],
+			[
+				"eslint",
+				"ESLint"
+			],
+			[
+				"ter",
+				"Preferences: Terminal Settings"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"cache",
+				"Package Control: Clear Cache Directory"
+			],
+			[
+				"select",
+				"UI: Select Color Scheme"
+			],
+			[
+				"selectc",
+				"UI: Select Color Scheme"
+			],
+			[
+				"color",
+				"UI: Select Color Scheme"
+			],
+			[
+				"color ",
+				"UI: Select Color Scheme"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"package remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"term",
+				"Terminus: Open Default Shell in Panel"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			],
+			[
+				"clojure tel",
+				"SublimeREPL: Clojure-Telnet"
+			],
+			[
+				"repl",
+				"SublimeREPL: Clojure"
+			],
+			[
+				"Package Control: insta",
+				"Package Control: Install Package"
+			],
+			[
+				"package ins",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 339.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/jedtiotuico/swift/vdom-native/metroish-bundler/src/index.jsx",
+		"/Users/jedtiotuico/swift/vdom-native/metroish-bundler/.jshintrc",
+		"/Users/jedtiotuico/Library/Application Support/Sublime Text/Packages/User/SublimeOnSaveBuild.sublime-settings",
+		"/Users/jedtiotuico/Library/Application Support/Sublime Text/Packages/User/jshint-files.sublime-build",
+		"/Users/jedtiotuico/swift/vdom-native/metroish-bundler/src/virtual-node.js",
+		"/Users/jedtiotuico/.zshrc",
+		"/Users/jedtiotuico/Library/Application Support/Sublime Text/Packages/JSHint/Base File.sublime-settings",
+		"/Users/jedtiotuico/swift/vdom-native/.sublime-project",
+		"/Users/jedtiotuico/Library/Application Support/Sublime Text/Packages/User/Base File.sublime-settings",
+		"/Users/jedtiotuico/Library/Application Support/Sublime Text/Packages/User/ESLint.sublime-settings",
+		"/Users/jedtiotuico/swift/vdom-native/metroish-bundler/package.json",
+		"/Users/jedtiotuico/swift/vdom-native/metroish-bundler/.eslintrc.js",
+		"/Users/jedtiotuico/.eslintrc.js",
+		"/Users/jedtiotuico/swift/vdom-native/metroish-bundler/src/utils.js",
+		"/Users/jedtiotuico/Library/Application Support/Sublime Text/Packages/SublimeOnSaveBuild/SublimeOnSaveBuild.sublime-settings",
+		"/Users/jedtiotuico/Library/Application Support/Sublime Text/Packages/ESLint/ESLint.sublime-settings",
+		"/Users/jedtiotuico/swift/vdom-native/metroish-bundler/server.js",
+		"/Users/jedtiotuico/swift/vdom-native/metroish-bundler/node_modules/.bin/eslint",
+		"/Users/jedtiotuico/swift/vdom-native/metroish-bundler/webpack.config.js",
+		"/Users/jedtiotuico/swift/vdom-native/metroish-bundler/src/webpack-plugin.js",
+		"/Users/jedtiotuico/swift/vdom-native/metroish-bundler/src/to-json.js",
+		"/Users/jedtiotuico/swift/cljs-webpack/package.json",
+		"/Users/jedtiotuico/swift/cljs-webpack/webpack.config.js",
+		"/Users/jedtiotuico/swift/cljs-webpack/src/hello_bundler/core.cljs",
+		"/Users/jedtiotuico/swift/cljs-webpack/build.edn",
+		"/Users/jedtiotuico/swift/cljs-webpack/deps.edn",
+		"/Users/jedtiotuico/swift/cljs-webpack/dist/bundle.js",
+		"/Users/jedtiotuico/swift/cljs-webpack/out/utils.js",
+		"/Users/jedtiotuico/swift/cljs-webpack/out/main.js",
+		"/Users/jedtiotuico/Library/Application Support/Sublime Text/Packages/User/cljs-build.sublime-build",
+		"/Users/jedtiotuico/swift/cljs-webpack/src/hello-bundler/core.cljs",
+		"/Users/jedtiotuico/swift/cljs-webpack/src/cljs-webpack/core.cljs",
+		"/Users/jedtiotuico/Library/Application Support/Sublime Text/Packages/SublimeREPL/SublimeREPL.sublime-settings",
+		"/Users/jedtiotuico/swift/cljs-webpack/src/cljs-webpack/build.edn",
+		"/Users/jedtiotuico/Library/Application Support/Sublime Text/Packages/paredit/paredit.sublime-settings",
+		"/Users/jedtiotuico/Library/Application Support/Sublime Text/Packages/User/paredit.sublime-settings",
+		"/Users/jedtiotuico/bin/copyPreferencePane.sh",
+		"/Users/jedtiotuico/python/functional-python-project/pylambda.py"
+	],
+	"find":
+	{
+		"height": 26.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 39.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.SublimeLinter":
+	{
+		"height": 0.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/User/jshint-files.sublime-build",
+	"project": "vdom-native.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"index",
+				"metroish-bundler/src/index.jsx"
+			],
+			[
+				"eslint",
+				"metroish-bundler/node_modules/.bin/eslint"
+			],
+			[
+				"pack",
+				"metroish-bundler/package.json"
+			],
+			[
+				"bundle",
+				"dist/bundle.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 275.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

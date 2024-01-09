@@ -36,6 +36,10 @@ class WSClientSocket: NSObject, WebSocketDelegate {
             print("websocket is disconnected: \(reason) with code: \(code)")
         case let .text(string):
             print("Received text: \(string)")
+            if string == "fetch" {
+                let _ = downloadBundle()
+                NotificationCenter.default.post(name: .refreshWindow, object: nil)
+            }
         case let .binary(data):
             print("Received data: \(data.count)")
         case .ping:

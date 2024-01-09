@@ -1,0 +1,12 @@
+{
+	"folders":
+	[
+	],
+	"build_systems":
+	[
+	  {
+	    "name": "Test Current Package",
+	    "target": "unit_testing_current_package",
+	  }
+	]
+}

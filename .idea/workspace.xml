@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c853c9cd-ff2c-4b1b-89b7-472566a59ed1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/ios/MyTodoList.xcworkspace/xcuserdata/jedtiotuico.xcuserdatad/UserInterfaceState.xcuserstate" beforeDir="false" afterPath="$PROJECT_DIR$/ios/MyTodoList.xcworkspace/xcuserdata/jedtiotuico.xcuserdatad/UserInterfaceState.xcuserstate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/MyTodoList.xcworkspace/xcuserdata/jedtiotuico.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/MyTodoList.xcworkspace/xcuserdata/jedtiotuico.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/MyTodoList.xcworkspace/xcuserdata/jedtiotuico.xcuserdatad/xcdebugger/Expressions.xcexplist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/MyTodoList.xcworkspace/xcuserdata/jedtiotuico.xcuserdatad/xcdebugger/Expressions.xcexplist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/MyTodoList/MyViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/MyTodoList/MyViewController.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/MyTodoList/SimpleTree.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/MyTodoList/SimpleTree.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/MyTodoList/bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/ios/MyTodoList/bundle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metroish-bundler/coverage/clover.xml" beforeDir="false" afterPath="$PROJECT_DIR$/metroish-bundler/coverage/clover.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metroish-bundler/coverage/coverage-final.json" beforeDir="false" afterPath="$PROJECT_DIR$/metroish-bundler/coverage/coverage-final.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metroish-bundler/coverage/lcov-report/core.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/metroish-bundler/coverage/lcov-report/core.js.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metroish-bundler/coverage/lcov-report/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/metroish-bundler/coverage/lcov-report/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metroish-bundler/coverage/lcov.info" beforeDir="false" afterPath="$PROJECT_DIR$/metroish-bundler/coverage/lcov.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metroish-bundler/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/metroish-bundler/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metroish-bundler/src/functions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/metroish-bundler/src/functions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metroish-bundler/src/utils.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/metroish-bundler/tests/functions.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/metroish-bundler/tests/functions.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metroish-bundler/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/metroish-bundler/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metroish-bundler/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/metroish-bundler/webpack.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2ZfBcHURjjSRolxiZ1ODCj7W0qN" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Jest.FunctionsTests.executor": "Run",
+    "Jest.FunctionsTests.shouldCreateElement_BodyWithLists.executor": "Run",
+    "Jest.FunctionsTests.shouldHandleChildren_singleNodeWithListNode.executor": "Run",
+    "Jest.FunctionsTests.shouldHandleIntentionalTextMaps.executor": "Run",
+    "Jest.FunctionsTests.shouldHandleSingleNode_CustomTag.executor": "Debug",
+    "Jest.FunctionsTests.shouldHandleSingleNode_Text.executor": "Run",
+    "Jest.FunctionsTests.shouldHandleTextNodes.executor": "Debug",
+    "Jest.FunctionsTests.shouldProcessChildren_ListNode.executor": "Debug",
+    "Jest.FunctionsTests.shouldProcessChildren_SingleNodeWithChildren.executor": "Debug",
+    "Jest.FunctionsTests.shouldProcessChildren_SingleNodeWithText.executor": "Run",
+    "Jest.FunctionsTests.shouldReturnTrue_hasTextTagEq.executor": "Debug",
+    "Jest.TScoreTests (1).executor": "Debug",
+    "Jest.TScoreTests.executor": "Debug",
+    "Jest.app.test.ts.executor": "Debug",
+    "Jest.coreTests (1).executor": "Run",
+    "Jest.coreTests.executor": "Run",
+    "Jest.coreTests.shoudTest.executor": "Debug",
+    "Jest.coreTests.should pass tests.executor": "Run",
+    "Jest.coreTests.shouldChildBeString_False.executor": "Run",
+    "Jest.coreTests.shouldChildBeString_True.executor": "Debug",
+    "Jest.coreTests.shouldCreateElement.executor": "Run",
+    "Jest.coreTests.shouldCreateElementText.executor": "Run",
+    "Jest.coreTests.shouldCreateElement_BodyWithLists.executor": "Debug",
+    "Jest.coreTests.shouldFirstChild.executor": "Debug",
+    "Jest.coreTests.shouldHandleChildren_ListNode.executor": "Run",
+    "Jest.coreTests.shouldHandleChildren_singleNodeWithListNode.executor": "Run",
+    "Jest.coreTests.shouldHandleIntentionalTextMaps.executor": "Debug",
+    "Jest.coreTests.shouldHandleListNode.executor": "Run",
+    "Jest.coreTests.shouldHandleListOfChildrenOFText.executor": "Debug",
+    "Jest.coreTests.shouldHandleSingleNode.executor": "Debug",
+    "Jest.coreTests.shouldHandleSingleNode_CustomTag.executor": "Run",
+    "Jest.coreTests.shouldHandleSingleNode_Tag.executor": "Debug",
+    "Jest.coreTests.shouldHandleTextNodes.executor": "Run",
+    "Jest.coreTests.shouldListizeArrays.executor": "Debug",
+    "Jest.coreTests.shouldListize_Arrays.executor": "Debug",
+    "Jest.coreTests.shouldListize_ArraysPrimitive.executor": "Run",
+    "Jest.coreTests.shouldListize_Arrays_primitive.executor": "Run",
+    "Jest.coreTests.shouldNotFirstChild_hasStringAsFirstChild.executor": "Run",
+    "Jest.coreTests.shouldNotFirstChild_hasStringAsFirstChild_null.executor": "Debug",
+    "Jest.coreTests.shouldNotListize_Lists.executor": "Debug",
+    "Jest.coreTests.shouldProcessChildren_ListNode.executor": "Run",
+    "Jest.coreTests.shouldProcessChildren_Lists.executor": "Run",
+    "Jest.coreTests.shouldProcessChildren_SingleNodeWithChildMap.executor": "Run",
+    "Jest.coreTests.shouldProcessChildren_SingleNodeWithChildren.executor": "Run",
+    "Jest.coreTests.shouldProcessChildren_SingleNodeWithChildrenMaps.executor": "Debug",
+    "Jest.coreTests.shouldProcessChildren_SingleNodeWithText.executor": "Run",
+    "Jest.coreTests.shouldProcessChildren_WithText.executor": "Debug",
+    "Jest.coreTests.shouldSchematizeHNodes.executor": "Debug",
+    "Jest.coreTests.shouldSchematizeIntentionalTextMaps.executor": "Debug",
+    "Jest.coreTests.shouldSchematizeMaps.executor": "Debug",
+    "Jest.coreTests.shouldSchematizeTextMaps.executor": "Debug",
+    "Jest.coreTests.shouldTest.executor": "Run",
+    "Jest.coreTests.shouldValidate h with children (1).executor": "Run",
+    "Jest.coreTests.shouldValidate h with children.executor": "Run",
+    "Jest.functions.test.executor": "Debug",
+    "Jest.functions.test.ts.executor": "Run",
+    "Jest.index.test.js.executor": "Run",
+    "Jest.index.ts tests.executor": "Run",
+    "Jest.sum module.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/jedtiotuico/swift/vdom-native",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs.jest.jest_package": "/Users/jedtiotuico/swift/vdom-native/metroish-bundler/node_modules/jest",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "npm",
+    "npm.build:dev.executor": "Run",
+    "npm.start.executor": "Debug",
+    "npm.test $FileName$.executor": "Debug",
+    "npm.test.executor": "Run",
+    "prettierjs.PrettierConfiguration.Package": "/Users/jedtiotuico/swift/vdom-native/metroish-bundler/node_modules/prettier",
+    "settings.editor.selected.configurable": "settings.javascript.prettier",
+    "ts.external.directory.path": "/Users/jedtiotuico/swift/vdom-native/metroish-bundler/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Jest.FunctionsTests">
+    <configuration name="FunctionsTests" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/metroish-bundler/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$/metroish-bundler" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/metroish-bundler/tests/functions.test.ts" />
+      <test-names>
+        <test-name value="FunctionsTests" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="FunctionsTests.shouldCreateElement_BodyWithLists" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/metroish-bundler/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$/metroish-bundler" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/metroish-bundler/tests/functions.test.ts" />
+      <test-names>
+        <test-name value="FunctionsTests" />
+        <test-name value="shouldCreateElement_BodyWithLists" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="FunctionsTests.shouldHandleChildren_singleNodeWithListNode" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/metroish-bundler/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$/metroish-bundler" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/metroish-bundler/tests/functions.test.ts" />
+      <test-names>
+        <test-name value="FunctionsTests" />
+        <test-name value="shouldHandleChildren_singleNodeWithListNode" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="FunctionsTests.shouldHandleSingleNode_Text" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/metroish-bundler/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$/metroish-bundler" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/metroish-bundler/tests/functions.test.ts" />
+      <test-names>
+        <test-name value="FunctionsTests" />
+        <test-name value="shouldHandleSingleNode_Text" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="functions.test.ts" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/metroish-bundler/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$/metroish-bundler" />
+      <envs />
+      <scope-kind value="TEST_FILE" />
+      <test-file value="$PROJECT_DIR$/metroish-bundler/tests/functions.test.ts" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Jest.FunctionsTests" />
+      <item itemvalue="Jest.FunctionsTests.shouldCreateElement_BodyWithLists" />
+      <item itemvalue="Jest.FunctionsTests.shouldHandleChildren_singleNodeWithListNode" />
+      <item itemvalue="Jest.FunctionsTests.shouldHandleSingleNode_Text" />
+      <item itemvalue="Jest.functions.test.ts" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Jest.FunctionsTests" />
+        <item itemvalue="Jest.FunctionsTests.shouldHandleSingleNode_Text" />
+        <item itemvalue="Jest.FunctionsTests.shouldCreateElement_BodyWithLists" />
+        <item itemvalue="Jest.functions.test.ts" />
+        <item itemvalue="Jest.FunctionsTests.shouldHandleChildren_singleNodeWithListNode" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c853c9cd-ff2c-4b1b-89b7-472566a59ed1" name="Changes" comment="" />
+      <created>1702803330584</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1702803330584</updated>
+      <workItem from="1702803331667" duration="4177000" />
+      <workItem from="1703078645481" duration="24000" />
+      <workItem from="1703078675422" duration="3383000" />
+      <workItem from="1703707689366" duration="6646000" />
+      <workItem from="1703758087040" duration="352000" />
+      <workItem from="1703758459914" duration="58389000" />
+      <workItem from="1703868140731" duration="6842000" />
+      <workItem from="1703876250567" duration="303000" />
+      <workItem from="1703876652282" duration="16672000" />
+      <workItem from="1703929994174" duration="25991000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/metroish-bundler/src/utils.js" />
+      </list>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="JavaScriptTestRunnerJest">
+        <watch expression="node.get(&quot;tagName&quot;)" language="TypeScript" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/vdom_native$coreTests.info" NAME="coreTests Coverage Results" MODIFIED="1703872441685" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>

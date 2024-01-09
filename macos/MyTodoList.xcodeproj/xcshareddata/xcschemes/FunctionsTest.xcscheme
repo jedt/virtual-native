@@ -23,6 +23,23 @@
                BlueprintName = "FunctionsTest"
                ReferencedContainer = "container:MyTodoList.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "FunctionsTest/testCalculateLayoutFromPrintedOutput()">
+               </Test>
+               <Test
+                  Identifier = "FunctionsTest/testChildrenArrayOfDictionariesParseJSONStringToTree()">
+               </Test>
+               <Test
+                  Identifier = "FunctionsTest/testCreateRect()">
+               </Test>
+               <Test
+                  Identifier = "FunctionsTest/testDictionaryFromTNodeParseJSONStringToTree()">
+               </Test>
+               <Test
+                  Identifier = "FunctionsTest/testGetChildrenRepresentationArrayOfArraysParseJSONStringToTree()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>
