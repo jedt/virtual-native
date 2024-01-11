@@ -1,5 +1,6 @@
 import { List, Map } from "immutable";
 import * as utils from "./utils";
+import { NodeMapType } from "./utils";
 
 export function fnMap(): any {
     const processListNode = (listNode: any): any => {
@@ -11,7 +12,7 @@ export function fnMap(): any {
             if (List.isList(item)) {
                 return processListNode(item);
             } else if (Map.isMap(item)) {
-                return processMapNode(item);
+                return processMapNode(item as NodeMapType);
             } else if (Array.isArray(item)) {
                 return processListNode(utils.createListFromArray(item));
             } else if (typeof item === "string") {
@@ -22,7 +23,7 @@ export function fnMap(): any {
         });
     };
 
-    function processMapNode(node: any): any {
+    function processMapNode(node: NodeMapType): NodeMapType {
         if (utils.hasStringAsFirstChildWithTextNode(node)) {
             return node;
         } else {
@@ -30,14 +31,17 @@ export function fnMap(): any {
                 const children = utils.childrenFromMapNode(node);
                 if (List.isList(children)) {
                     //process each childrenFromMapNodes using tail recursion
-                    return node.set("children", processListNode(children));
+                    return node.set(
+                        "children",
+                        processListNode(children),
+                    ) as NodeMapType;
                 } else {
                     //child is not a list
                     if (typeof children === "string") {
                         return node.set(
                             "children",
                             utils.createListFromString(children),
-                        );
+                        ) as NodeMapType;
                     }
                 }
             } else if (typeof node === "string") {
@@ -70,7 +74,7 @@ export function fnMap(): any {
 
     function processChildren(node: any): any {
         if (Map.isMap(node)) {
-            return processMapNode(node);
+            return processMapNode(node as NodeMapType);
         } else if (List.isList(node)) {
             return processListNode(node);
         } else {
@@ -78,11 +82,11 @@ export function fnMap(): any {
         }
     }
 
-    function ht(tagName: string, ...children: any): any {
+    function ht(tagName: string, ...children: any): NodeMapType {
         return h(tagName, Map({}), ...children);
     }
 
-    function h(tagName: string, props: any, ...children: any): any {
+    function h(tagName: string, props: any, ...children: any): NodeMapType {
         const childrenFn = (tagName: string, children: any): any => {
             if (
                 utils.shouldChildBeStringAndNotCreateNewNode(tagName, children)
