@@ -23,6 +23,7 @@ export function fnMap(): any {
         });
     };
 
+    //process using recursion
     function processMapNode(node: NodeMapType): NodeMapType {
         if (utils.hasStringAsFirstChildWithTextNode(node)) {
             return node;
@@ -30,7 +31,6 @@ export function fnMap(): any {
             if (Map.isMap(node)) {
                 const children = utils.childrenFromMapNode(node);
                 if (List.isList(children)) {
-                    //process each childrenFromMapNodes using tail recursion
                     return node.set(
                         "children",
                         processListNode(children),
@@ -54,7 +54,7 @@ export function fnMap(): any {
         const shouldCreateTextNodeBecauseTagNameIsNotText = (
             tagName: string,
             item: any,
-        ) => {
+        ): boolean => {
             if (typeof item === "string" && tagName !== utils.tagNameText) {
                 return true;
             } else {

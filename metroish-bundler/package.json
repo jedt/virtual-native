@@ -45,17 +45,12 @@
     "crypto-js": "^4.2.0",
     "global": "^4.4.0",
     "hermes-eslint": "^0.18.2",
-    "hyperscript-helpers": "^3.0.3",
     "immutable": "^5.0.0-beta.4",
-    "joi": "^17.11.0",
     "jsonschema": "^1.4.1",
     "keymirror": "^0.1.1",
     "lodash": "^4.17.21",
-    "preact": "^10.19.3",
     "prop-types": "^15.8.1",
-    "ramda": "^0.29.1",
     "source-map-loader": "^4.0.2",
-    "virtual-dom": "^2.1.1",
     "ws": "^8.16.0"
   }
 }

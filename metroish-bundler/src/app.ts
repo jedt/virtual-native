@@ -2,6 +2,10 @@
 import * as fn from "./functions";
 
 const renderApp = () => {
+    const touchableCallback = function () {
+        console.log("hello, world");
+    };
+
     const { h, ht } = fn.fnMap();
     return h("bodyOfTwo", {}, [
         h("divTargetLeft", {}, ht("View", "TargetLeft")),
@@ -9,7 +13,7 @@ const renderApp = () => {
             "divTarget",
             {},
             h("View", {}, [
-                ht("View", "Sibling two"),
+                h("touchable", { onPress: touchableCallback }),
                 ht("View", "Sibling one"),
             ]),
         ),
