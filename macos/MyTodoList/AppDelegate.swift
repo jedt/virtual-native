@@ -37,8 +37,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         NotificationCenter.default.addObserver(self, selector: #selector(handleCreateWindow(_:)), name: .createWindow, object: nil)
-
-        startServer()
+		startServer()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

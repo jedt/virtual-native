@@ -1,8 +1,91 @@
 import { List, Map } from "immutable";
 import * as utils from "./utils";
-import { NodeMapType } from "./utils";
+import { NodeMapType, nodePropsIsNotEmpty } from "./utils";
 
+export function parseFunctionsFnMap(): any {
+    function processMapNode(node: NodeMapType): NodeMapType {
+        if (node.has("props")) {
+            const props = node.get("props");
+            if (Map.isMap(props)) {
+                const processedProps = props.map((value, key) => {
+                    if (typeof value === "string" && isFunctionString(value)) {
+                        try {
+                            //eval(`(${value})`);
+                            (globalThis as Global)[key as string] = eval(
+                                `(${value})`,
+                            );
+                            return value;
+                        } catch (error) {
+                            console.error(
+                                "Error parsing function string:",
+                                error,
+                            );
+                            return value;
+                        }
+                    }
+                    return value;
+                });
+                node = node.set("props", processedProps);
+            }
+        }
+
+        const children = utils.childrenFromMapNode(node);
+        if (List.isList(children)) {
+            node = node.set("children", processListNode(children));
+        }
+        return node;
+    }
+
+    function isFunctionString(str: string): boolean {
+        try {
+            const evaluatedResult = eval("(" + str + ")");
+            return typeof evaluatedResult === "function";
+        } catch (e) {
+            return false;
+        }
+    }
+
+    const processListNode = (listNode: any): any => {
+        if (!List.isList(listNode)) {
+            throw Error(`Not a list: ${listNode}`);
+        }
+
+        return listNode.map((item) => {
+            if (List.isList(item)) {
+                return processListNode(item);
+            } else if (Map.isMap(item)) {
+                return processMapNode(item as NodeMapType);
+            } else if (Array.isArray(item)) {
+                return processListNode(utils.createListFromArray(item));
+            } else if (typeof item === "string") {
+                return utils.createTextMapNodeFromString(item);
+            } else {
+                throw Error(`Unexpected type of child: ${item}`);
+            }
+        });
+    };
+
+    function evalAllNodesWithFunctions(node: NodeMapType): NodeMapType {
+        if (utils.hasStringAsFirstChildWithTextNode(node)) {
+            return node;
+        } else if (Map.isMap(node)) {
+            return processMapNode(node);
+        } else {
+            throw Error(`Unexpected type of node: ${node}`);
+        }
+    }
+
+    return {
+        isFunctionString: isFunctionString,
+        evalAllNodesWithFunctions: evalAllNodesWithFunctions,
+    };
+}
 export function fnMap(): any {
+    let uniqueID: number = 0;
+    function getUniqueID(): number {
+        return ++uniqueID;
+    }
+
     const processListNode = (listNode: any): any => {
         if (!List.isList(listNode)) {
             throw Error(`not a list ${listNode}`);
@@ -23,6 +106,21 @@ export function fnMap(): any {
         });
     };
 
+    function stringifyFunctionsProps(withNode: NodeMapType): NodeMapType {
+        if (utils.nodePropsIsNotEmpty(withNode)) {
+            // Creating a deep copy to avoid mutating the original node
+            return withNode.update("props", (propsMap) => {
+                return propsMap.map((value: any, key: string) => {
+                    if (typeof value === "function") {
+                        return value.toString();
+                    }
+                    return value;
+                });
+            });
+        }
+        return withNode;
+    }
+
     //process using recursion
     function processMapNode(node: NodeMapType): NodeMapType {
         if (utils.hasStringAsFirstChildWithTextNode(node)) {
@@ -42,12 +140,16 @@ export function fnMap(): any {
                             "children",
                             utils.createListFromString(children),
                         ) as NodeMapType;
+                    } else {
+                        throw new Error('Unexpected type of child: "string"');
                     }
                 }
             } else if (typeof node === "string") {
                 throw new Error('Unexpected type of child: "string"');
             }
         }
+
+        return node;
     }
 
     function processChildrenWithTagName(tagName: string, children: any): any {
@@ -82,6 +184,32 @@ export function fnMap(): any {
         }
     }
 
+    function createPropsWithUniqueIDIfNeeded(
+        node: NodeMapType,
+        withProps: Map<string, any>,
+    ): NodeMapType {
+        if (nodePropsIsNotEmpty(node)) {
+            const nodeProps = node.get("props");
+            if (nodeProps.get("id") != null) return node;
+        } else {
+            if (Map.isMap(withProps)) {
+                if (withProps.get("id") != null) {
+                    return node.set("props", withProps);
+                } else {
+                    return node.set(
+                        "props",
+                        withProps.set("id", getUniqueID()),
+                    );
+                }
+            } else {
+                const newMap = Map({ id: getUniqueID() });
+                return node.set("props", newMap);
+            }
+        }
+
+        return node;
+    }
+
     function ht(tagName: string, ...children: any): NodeMapType {
         return h(tagName, Map({}), ...children);
     }
@@ -97,11 +225,14 @@ export function fnMap(): any {
                 return processChildrenWithTagName(tagName, listized);
             }
         };
-        return Map({
+
+        const newMap = Map({
             tagName: tagName,
-            props: Map(props || {}),
             children: childrenFn(tagName, children),
         });
+
+        const newMapCopy = createPropsWithUniqueIDIfNeeded(newMap, props);
+        return stringifyFunctionsProps(newMapCopy);
     }
 
     return {

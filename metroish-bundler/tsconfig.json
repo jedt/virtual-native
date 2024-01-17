@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "strictNullChecks": true,
     "alwaysStrict": true,
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
@@ -7,7 +8,8 @@
     "target": "ES6",
     "esModuleInterop": true,
     "allowJs": true,
-    "moduleResolution": "NodeNext"
+    "moduleResolution": "NodeNext",
+    "sourceMap": true
   },
   "files": [
     "src/global.d.ts",

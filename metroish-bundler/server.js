@@ -10,6 +10,7 @@ const WebSocket = require("ws");
 // Create an HTTP server
 const server = http.createServer((req, res) => {
     if (req.url === "/download") {
+        console.log("download requested");
         // Handle file download
         const filePath = "./dist/main.js";
         const stat = fs.statSync(filePath);

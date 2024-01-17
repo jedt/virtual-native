@@ -3,6 +3,37 @@ import { List, Map } from "immutable";
 import * as fn from "../src/functions";
 
 describe("FunctionsTests", () => {
+    it("shouldParseNodeMap_WithSerializedFunction", (done) => {
+        const { evalAllNodesWithFunctions } = fn.parseFunctionsFnMap();
+        const { h } = fn.fnMap();
+        function callbackFoo() {
+            return "foobar";
+        }
+
+        const bodyMap = h(
+            "body",
+            Map({ foo: "bar" }),
+            List([
+                h(
+                    "span",
+                    Map({
+                        onCallback_shouldParseNodeMap_WithSerializedFunction:
+                            callbackFoo,
+                    }),
+                    "Hello, ",
+                ),
+            ]),
+        );
+
+        const jsonString = JSON.stringify(evalAllNodesWithFunctions(bodyMap));
+        expect(
+            (globalThis as Global)[
+                "onCallback_shouldParseNodeMap_WithSerializedFunction"
+            ](),
+        ).toEqual("foobar");
+        done();
+    });
+
     it("shouldReturnTrue_hasTextTagEq", (done) => {
         const { hasTextTagEq } = fn.fnMap();
         expect(
@@ -16,6 +47,7 @@ describe("FunctionsTests", () => {
         ).toBeTruthy();
         done();
     });
+
     it("shouldReturnTrue_hasTextTagEq", (done) => {
         const { hasTextTagEq } = fn.fnMap();
         expect(
@@ -30,6 +62,7 @@ describe("FunctionsTests", () => {
         expect(hasTextTagEq(Map({}))).toBeFalsy();
         done();
     });
+
     it("shouldHasStringAsFirstChild", (done) => {
         const { hasStringAsFirstChildWithTextNode } = fn.fnMap();
         expect(
@@ -58,18 +91,20 @@ describe("FunctionsTests", () => {
         ).toBeFalsy();
         done();
     });
+
     it("shouldHandleSingleNode_Text", (done) => {
         const { h } = fn.fnMap();
         const testNode = h("Text", Map({}), "hello");
         expect(testNode).toEqual(
             Map({
                 tagName: "Text",
-                props: Map({}),
+                props: Map({ id: 1 }),
                 children: "hello",
             }),
         );
         done();
     });
+
     it("shouldNotListize_Lists", (done) => {
         const listNode = List([
             Map({
@@ -101,6 +136,7 @@ describe("FunctionsTests", () => {
         );
         done();
     });
+
     it("shouldListize_ArraysPrimitive", (done) => {
         const listized = fn.fnMap().listize(["hi"]);
         expect(listized.size).toEqual(1);
@@ -185,6 +221,7 @@ describe("FunctionsTests", () => {
         expect(actual).toBeFalsy();
         done();
     });
+
     it("shouldProcessChildren_SingleNodeWithChildren", (done) => {
         const { processMapNode } = fn.fnMap();
 
@@ -239,6 +276,7 @@ describe("FunctionsTests", () => {
         );
         done();
     });
+
     it("shouldProcessChildren_SingleNodeWithText", (done) => {
         const { processMapNode } = fn.fnMap();
 
@@ -322,7 +360,7 @@ describe("FunctionsTests", () => {
         const textNode = List([
             Map({
                 tagName: "span",
-                props: Map({}),
+                props: Map({ foo: "bar" }),
                 children: "Hello, ",
             }),
             Map({
@@ -337,7 +375,9 @@ describe("FunctionsTests", () => {
             List([
                 Map({
                     tagName: "span",
-                    props: Map({}),
+                    props: Map({
+                        foo: "bar",
+                    }),
                     children: List([
                         Map({
                             tagName: "Text",
@@ -364,11 +404,18 @@ describe("FunctionsTests", () => {
 
     it("shouldHandleSingleNode_CustomTag", (done) => {
         const { h } = fn.fnMap();
-        const testNode = h("span", Map({}), "hello");
+        const handleFoo = function () {
+            console.log("bar");
+        };
+
+        const testNode = h("span", Map({ foo: handleFoo }), "hello");
         expect(testNode).toEqual(
             Map({
                 tagName: "span",
-                props: Map({}),
+                props: Map({
+                    foo: 'function () {\n            console.log("bar");\n        }',
+                    id: 1,
+                }),
                 children: List([
                     Map({
                         tagName: "Text",
@@ -393,14 +440,18 @@ describe("FunctionsTests", () => {
         expect(items.get(0)).toEqual(
             Map({
                 tagName: "Text",
-                props: Map({}),
+                props: Map({
+                    id: 1,
+                }),
                 children: "hello",
             }),
         );
         expect(items.get(1)).toEqual(
             Map({
                 tagName: "Text",
-                props: Map({}),
+                props: Map({
+                    id: 2,
+                }),
                 children: "world",
             }),
         );
@@ -409,17 +460,30 @@ describe("FunctionsTests", () => {
     });
 
     it("shouldHandleListOfChildrenOFText", (done) => {
+        const { evalAllNodesWithFunctions } = fn.parseFunctionsFnMap();
         const { h } = fn.fnMap();
+        function callbackFoo() {
+            return "callback";
+        }
+
+        function callbackBody() {
+            return "callbackBody_shouldHandleListOfChildrenOFText";
+        }
         const bodyMap = h(
             "body",
-            Map({}),
+            Map({ foo: "bar", onPressBody: callbackBody }),
             List([
-                h("span", Map({}), "Hello, "),
+                h("span", Map({ onPress: callbackFoo }), "Hello, "),
                 h("strong", Map({}), "World"),
             ]),
         );
 
         expect(bodyMap.get("tagName")).toEqual("body");
+        const bodyProps = bodyMap.get("props");
+        expect(bodyProps.get("foo")).toEqual("bar");
+        expect(bodyProps.get("onPressBody")).toEqual(`function callbackBody() {
+            return "callbackBody_shouldHandleListOfChildrenOFText";
+        }`);
         const children = bodyMap.get("children");
         expect(children.size).toEqual(1);
         const list = children.get(0);
@@ -427,7 +491,12 @@ describe("FunctionsTests", () => {
         expect(list.get(0)).toEqual(
             Map({
                 tagName: "span",
-                props: Map({}),
+                props: Map({
+                    onPress: `function callbackFoo() {
+            return "callback";
+        }`,
+                    id: 1,
+                }),
                 children: List([
                     Map({
                         tagName: "Text",
@@ -440,7 +509,7 @@ describe("FunctionsTests", () => {
         expect(list.get(1)).toEqual(
             Map({
                 tagName: "strong",
-                props: Map({}),
+                props: Map({ id: 2 }),
                 children: List([
                     Map({
                         tagName: "Text",
@@ -451,6 +520,13 @@ describe("FunctionsTests", () => {
             }),
         );
 
+        evalAllNodesWithFunctions(bodyMap);
+
+        expect((globalThis as Global)["onPressBody"]()).toEqual(
+            "callbackBody_shouldHandleListOfChildrenOFText",
+        );
+
+        expect((globalThis as Global)["onPress"]()).toEqual("callback");
         done();
     });
 
@@ -459,7 +535,7 @@ describe("FunctionsTests", () => {
         const testNode = ht("Text", "Hello");
 
         const output = fn.mapToXML(testNode);
-        expect(output).toEqual("<Text>Hello</Text>");
+        expect(output).toEqual('<Text id="1">Hello</Text>');
         done();
     });
 
@@ -472,7 +548,7 @@ describe("FunctionsTests", () => {
 
         const output = fn.mapToXML(testNode);
         expect(output).toEqual(
-            "<body><View><Text>Hello, </Text></View><View><Text>World</Text></View></body>",
+            '<body id="3"><View id="1"><Text>Hello, </Text></View><View id="2"><Text>World</Text></View></body>',
         );
         done();
     });

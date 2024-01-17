@@ -1,12 +1,13 @@
 "use strict";
 import * as fn from "./functions";
+const { evalAllNodesWithFunctions } = fn.parseFunctionsFnMap();
+const { h, ht } = fn.fnMap();
 
 const renderApp = () => {
     const touchableCallback = function () {
-        console.log("hello, world");
+        return Math.PI;
     };
 
-    const { h, ht } = fn.fnMap();
     return h("bodyOfTwo", {}, [
         h("divTargetLeft", {}, ht("View", "TargetLeft")),
         h(
@@ -23,7 +24,10 @@ const renderApp = () => {
 
 export const getRootNode = () => {
     const root = renderApp();
-    return JSON.stringify(root);
+    return JSON.stringify(evalAllNodesWithFunctions(root));
 };
 
-global.getRootNode = getRootNode;
+// Assign getRootNode to the global object
+(globalThis as Global)["getRootNode"] = getRootNode;
+
+getRootNode();

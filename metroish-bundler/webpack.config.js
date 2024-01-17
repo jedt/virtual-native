@@ -1,5 +1,5 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
-
+const webpack = require("webpack");
 const path = require("path");
 const WebpackPlugin = require("./src/webpack-plugin");
 
@@ -14,6 +14,7 @@ const config = {
         // Add your plugins here
         // Learn more about plugins from https://webpack.js.org/configuration/plugins/
         new WebpackPlugin(),
+        new webpack.SourceMapDevToolPlugin({}),
     ],
     module: {
         rules: [

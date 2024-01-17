@@ -8,9 +8,9 @@
 import Dispatch
 import Foundation
 import JavaScriptCore
+import PureLayout
 import Starscream
 import Swifter
-import PureLayout
 
 typealias SizeProps = [[String: (CGFloat, CGFloat)]]
 typealias RectDictionary = [String: [String: CGFloat]]
@@ -349,11 +349,9 @@ private func createViews(from nodeDictionary: [String: Any], parentView: TNodeVi
 
     var previousSibling: TNodeView?
     let childrenCount = getChildrenCount(nodeDictionary)
-    // Check if node has children and process them
     if let childrenArrayContainer = nodeDictionary["children"] as? [[[String: Any]]] {
         for childArray in childrenArrayContainer {
             for (index, childNodeDictionary) in childArray.enumerated() {
-                // Create a child view
                 if let childView = createChildView(from: childNodeDictionary) {
                     guard let tagName: String = childNodeDictionary["tagName"] as? String else {
                         continue
@@ -361,7 +359,6 @@ private func createViews(from nodeDictionary: [String: Any], parentView: TNodeVi
                     childView.tagName = tagName
                     currentParentView.addSubview(childView)
 
-                    // Determine if the current child is the last child
                     let isLastChild = index == (childrenCount - 1)
 
                     setupConstraints(
@@ -376,7 +373,6 @@ private func createViews(from nodeDictionary: [String: Any], parentView: TNodeVi
 
                     previousSibling = childView
 
-                    // Recursively create views for nested children
                     createViews(from: childNodeDictionary, parentView: childView)
                 }
             }
@@ -396,7 +392,6 @@ private func createChildView(from nodeDictionary: [String: Any]) -> TNodeView? {
     childView.layer?.borderWidth = 1
     childView.layer?.borderColor = NSColor.black.cgColor
     childView.translatesAutoresizingMaskIntoConstraints = false
-    // Configure childView with properties from nodeDictionary...
 
     return childView
 }
@@ -417,21 +412,18 @@ private func setupConstraints(for childView: TNodeView,
                               isLastChild: Bool,
                               siblingCount: Int,
                               horizontalPadding: CGFloat = 0,
-                              verticalPadding: CGFloat = 0) {
-
+                              verticalPadding: CGFloat = 0)
+{
     childView.translatesAutoresizingMaskIntoConstraints = false
     print("setupConstraints for \(String(describing: childView.tagName)) with \(String(describing: parentView.tagName))")
 
-    // Pin to left and right of the parent with horizontal padding
     childView.autoPinEdge(toSuperviewEdge: .left, withInset: horizontalPadding)
     childView.autoPinEdge(toSuperviewEdge: .right, withInset: horizontalPadding)
 
     if let previousSibling = previousSibling {
-        // Pin top edge to the bottom of the previous sibling with vertical padding
         childView.autoPinEdge(.top, to: .bottom, of: previousSibling, withOffset: verticalPadding)
     } else {
         if siblingCount > 1 {
-            // If there is no previous sibling, pin to the top of the parent
             childView.autoPinEdge(toSuperviewEdge: .top, withInset: verticalPadding)
             childView.autoMatch(.height, to: .height, of: parentView, withMultiplier: 1 / CGFloat(siblingCount))
         }
@@ -440,13 +432,9 @@ private func setupConstraints(for childView: TNodeView,
     if isLastChild {
         if siblingCount == 1 {
             childView.autoPinEdge(toSuperviewEdge: .top, withInset: verticalPadding)
-            // If the only child, pin to the bottom of the parent
             childView.autoPinEdge(toSuperviewEdge: .bottom, withInset: verticalPadding)
         } else if siblingCount > 1 {
-            // If this is the last child in a group of siblings
-            // Pin bottom edge to the bottom of the parentView
             childView.autoPinEdge(toSuperviewEdge: .bottom, withInset: verticalPadding)
-            //childView.autoMatch(.height, to: .height, of: parentView, withMultiplier: 1 / CGFloat(siblingCount))
         }
     }
 }
@@ -460,15 +448,36 @@ func READ(_ str: String) -> String {
     return str
 }
 
+func testCallback() -> String {
+    var resultString = ""
+    let semaphore = DispatchSemaphore(value: 0)
+
+    if let callbackFunction = context?.objectForKeyedSubscript("onPress"), let result = callbackFunction.call(withArguments: []) {
+        if let output = result.toString() {
+            // this will return and return EVAL
+            resultString = output
+            semaphore.signal()
+        }
+    }
+
+    while true {
+        if semaphore.wait(timeout: .now() + 0.1) == .timedOut {
+        } else {
+            break // Semaphore has been signaled, exit the loop
+        }
+    }
+
+    return resultString
+}
+
 func downloadBundle() -> String {
     var resultString = ""
     let semaphore = DispatchSemaphore(value: 0)
     downloadFile(from: urlString, to: localPath) { fileContents, error in
         if let error {
-            print("Download failed: \(error)")
+			resultString = "Download failed: \(error)"
             semaphore.signal()
         } else if let fileContents {
-            let context = JSContext()
             context?.evaluateScript(fileContents)
 
             if let rootNodeFunction = context?.objectForKeyedSubscript("getRootNode"), let result = rootNodeFunction.call(withArguments: []) {
@@ -496,6 +505,8 @@ func downloadBundle() -> String {
 func EVAL(_ str: String) -> String {
     var resultString = ""
     switch str {
+        case "test-callback":
+            return testCallback()
         case "start":
             NotificationCenter.default.post(name: .createWindow, object: nil)
         case "fetch":
@@ -525,13 +536,12 @@ func connectToBundler() {
     socketDelegate.connectToBundler()
 }
 
-func readFileToString(from filePath: String) -> String? {
+func readFileToString(from filePath: String) throws -> String? {
     do {
         let contents = try String(contentsOfFile: filePath)
         return contents
     } catch {
-        print("Error reading file: \(error)")
-        return nil
+        throw NSError(domain: "Error reading file: \(error)", code: 0)
     }
 }
 
@@ -551,7 +561,7 @@ func downloadFile(from urlString: String, to localPath: String, completion: @esc
                 }
 
                 try FileManager.default.moveItem(at: tempLocalUrl, to: destinationUrl)
-                if let fileContents = readFileToString(from: localPath) {
+                if let fileContents = try readFileToString(from: localPath) {
                     completion(fileContents, nil)
                 } else {
                     print("Failed to read the file.")

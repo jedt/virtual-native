@@ -16,6 +16,7 @@ export function defaultNode(node: ArrayLike<any>): NodeMapType {
         children: List([node]),
     });
 }
+
 export function createTextMapNodeFromString(str: string): NodeMapType {
     return Map({
         tagName: "Text",
@@ -26,6 +27,16 @@ export function createTextMapNodeFromString(str: string): NodeMapType {
 
 export function mapNotEmpty(node: NodeMapType): boolean {
     return node?.size > 0;
+}
+
+export function nodePropsIsNotEmpty(node: NodeMapType): boolean {
+    if (mapNotEmpty(node) && node.has("props")) {
+        if (node.get("props").size > 0) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 export function childrenFromMapNode(node: any): any {
