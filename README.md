@@ -11,16 +11,21 @@ Example code:
 ```
 "use strict";
 import * as fn from "./functions";
+const { evalAllNodesWithFunctions } = fn.parseFunctionsFnMap();
+const { h, ht } = fn.fnMap();
 
 const renderApp = () => {
-    const { h, ht } = fn.fnMap();
+    const touchableCallback = function () {
+        return Math.PI;
+    };
+
     return h("bodyOfTwo", {}, [
         h("divTargetLeft", {}, ht("View", "TargetLeft")),
         h(
             "divTarget",
             {},
             h("View", {}, [
-                ht("View", "Sibling two"),
+                h("touchable", { onPress: touchableCallback }),
                 ht("View", "Sibling one"),
             ]),
         ),
@@ -30,10 +35,12 @@ const renderApp = () => {
 
 export const getRootNode = () => {
     const root = renderApp();
-    return JSON.stringify(root);
+    return JSON.stringify(evalAllNodesWithFunctions(root));
 };
 
-global.getRootNode = getRootNode;
+// Assign getRootNode to the global object
+(globalThis as Global)["getRootNode"] = getRootNode;
+
 
 ```
 
