@@ -1,11 +1,16 @@
 "use strict";
 import * as fn from "./functions";
-const { evalAllNodesWithFunctions } = fn.parseFunctionsFnMap();
+const { evalAllNodesWithFunctions, invokeExposedJsFn } =
+    fn.parseFunctionsFnMap();
 const { h, ht } = fn.fnMap();
 
 const renderApp = () => {
-    const touchableCallback = function () {
+    const touchableMathCallback = function () {
         return Math.PI;
+    };
+
+    const touchableFooCallback = function () {
+        return "## bar ##";
     };
 
     return h("bodyOfTwo", {}, [
@@ -14,7 +19,8 @@ const renderApp = () => {
             "divTarget",
             {},
             h("View", {}, [
-                h("touchable", { onPress: touchableCallback }),
+                h("touchable", { onPress: touchableFooCallback }),
+                h("touchable", { onPress: touchableMathCallback }),
                 ht("View", "Sibling one"),
             ]),
         ),
@@ -23,11 +29,13 @@ const renderApp = () => {
 };
 
 export const getRootNode = () => {
-    const root = renderApp();
-    return JSON.stringify(evalAllNodesWithFunctions(root));
+    const app = renderApp();
+    return JSON.stringify(evalAllNodesWithFunctions("app", app));
 };
 
 // Assign getRootNode to the global object
 (globalThis as Global)["getRootNode"] = getRootNode;
+(globalThis as Global)["invokeExposedJsFn"] = invokeExposedJsFn;
 
-getRootNode();
+// getRootNode();
+// console.log(invokeExposedJsFn("app.4.onPress"));

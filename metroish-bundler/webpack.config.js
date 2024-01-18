@@ -2,7 +2,8 @@
 const webpack = require("webpack");
 const path = require("path");
 const WebpackPlugin = require("./src/webpack-plugin");
-
+const BundleAnalyzerPlugin =
+    require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const isProduction = process.env.NODE_ENV == "production";
 
 const config = {
@@ -15,6 +16,7 @@ const config = {
         // Learn more about plugins from https://webpack.js.org/configuration/plugins/
         new WebpackPlugin(),
         new webpack.SourceMapDevToolPlugin({}),
+        // new BundleAnalyzerPlugin(),
     ],
     module: {
         rules: [
@@ -38,10 +40,7 @@ const config = {
 };
 
 module.exports = () => {
-    if (isProduction) {
-        config.mode = "production";
-    } else {
-        config.mode = "development";
-    }
+    config.mode = "development";
+    config.devtool = "eval-source-map";
     return config;
 };

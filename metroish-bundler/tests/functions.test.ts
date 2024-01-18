@@ -3,8 +3,56 @@ import { List, Map } from "immutable";
 import * as fn from "../src/functions";
 
 describe("FunctionsTests", () => {
+    it("shouldParseNodeMap_WithPropsObj", (done) => {
+        const {
+            evalAllNodesWithFunctions,
+            getExposedFunctionKeysWithTarget,
+            invokeExposedJsFn,
+        } = fn.parseFunctionsFnMap();
+        const { h } = fn.fnMap();
+
+        function callbackFoo() {
+            return "foobar";
+        }
+
+        const bodyMap = h(
+            "body",
+            { foo: "bar", onPress: callbackFoo },
+            List([h("span", {}, "Hello, ")]),
+        );
+
+        expect(bodyMap.get("tagName")).toEqual("body");
+
+        const propsNode: Map<string, any> = bodyMap.get("props");
+        expect(propsNode.get("foo")).toEqual("bar");
+        expect(propsNode.get("onPress")).toEqual(`function callbackFoo() {
+            return "foobar";
+        }`);
+
+        const copyNode = evalAllNodesWithFunctions("bodyMap", bodyMap);
+        const copyPropsNode: Map<string, any> = copyNode.get("props");
+        expect(copyPropsNode.size).toEqual(4);
+        expect(copyPropsNode.get("id")).toEqual(2);
+        expect(copyPropsNode.get("foo")).toEqual("bar");
+        expect(copyPropsNode.get("bridgeID")).toEqual("bodyMap.2.onPress");
+        expect(copyPropsNode.get("onPress")).toEqual(`function callbackFoo() {
+            return "foobar";
+        }`);
+        const fnKeysList: List<string> =
+            getExposedFunctionKeysWithTarget("bodyMap.2.onPress");
+
+        expect(fnKeysList.get(0)).toEqual("bodyMap.2.onPress");
+
+        expect(invokeExposedJsFn("bodyMap.2.onPress")).toEqual("foobar");
+        done();
+    });
+
     it("shouldParseNodeMap_WithSerializedFunction", (done) => {
-        const { evalAllNodesWithFunctions } = fn.parseFunctionsFnMap();
+        const {
+            evalAllNodesWithFunctions,
+            getExposedFunctionKeysWithTarget,
+            invokeExposedJsFn,
+        } = fn.parseFunctionsFnMap();
         const { h } = fn.fnMap();
         function callbackFoo() {
             return "foobar";
@@ -25,11 +73,29 @@ describe("FunctionsTests", () => {
             ]),
         );
 
-        const jsonString = JSON.stringify(evalAllNodesWithFunctions(bodyMap));
+        const copyNode = evalAllNodesWithFunctions("bodyMap", bodyMap);
+        expect(copyNode.get("props").size).toEqual(2);
+        const children = copyNode.get("children");
+        expect(children.size).toEqual(1);
+        const childNode = children.get(0).get(0);
+        const childProps = childNode.get("props");
+        expect(childProps.size).toEqual(3);
+        expect(childProps.get("id")).toEqual(1);
+        expect(childProps.get("bridgeID")).toEqual(
+            "bodyMap.1.onCallback_shouldParseNodeMap_WithSerializedFunction",
+        );
+        const fnKeysList: List<string> = getExposedFunctionKeysWithTarget(
+            "bodyMap.1.onCallback_shouldParseNodeMap_WithSerializedFunction",
+        );
+
+        expect(fnKeysList.get(0)).toEqual(
+            "bodyMap.1.onCallback_shouldParseNodeMap_WithSerializedFunction",
+        );
+
         expect(
-            (globalThis as Global)[
-                "onCallback_shouldParseNodeMap_WithSerializedFunction"
-            ](),
+            invokeExposedJsFn(
+                "bodyMap.1.onCallback_shouldParseNodeMap_WithSerializedFunction",
+            ),
         ).toEqual("foobar");
         done();
     });
@@ -460,10 +526,11 @@ describe("FunctionsTests", () => {
     });
 
     it("shouldHandleListOfChildrenOFText", (done) => {
-        const { evalAllNodesWithFunctions } = fn.parseFunctionsFnMap();
+        const { evalAllNodesWithFunctions, getExposedFunctionKeysWithTarget } =
+            fn.parseFunctionsFnMap();
         const { h } = fn.fnMap();
         function callbackFoo() {
-            return "callback";
+            return "callbackFoo_shouldHandleListOfChildrenOFText";
         }
 
         function callbackBody() {
@@ -471,7 +538,7 @@ describe("FunctionsTests", () => {
         }
         const bodyMap = h(
             "body",
-            Map({ foo: "bar", onPressBody: callbackBody }),
+            Map({ foo: "bar", onPress: callbackBody }),
             List([
                 h("span", Map({ onPress: callbackFoo }), "Hello, "),
                 h("strong", Map({}), "World"),
@@ -481,7 +548,7 @@ describe("FunctionsTests", () => {
         expect(bodyMap.get("tagName")).toEqual("body");
         const bodyProps = bodyMap.get("props");
         expect(bodyProps.get("foo")).toEqual("bar");
-        expect(bodyProps.get("onPressBody")).toEqual(`function callbackBody() {
+        expect(bodyProps.get("onPress")).toEqual(`function callbackBody() {
             return "callbackBody_shouldHandleListOfChildrenOFText";
         }`);
         const children = bodyMap.get("children");
@@ -493,7 +560,7 @@ describe("FunctionsTests", () => {
                 tagName: "span",
                 props: Map({
                     onPress: `function callbackFoo() {
-            return "callback";
+            return "callbackFoo_shouldHandleListOfChildrenOFText";
         }`,
                     id: 1,
                 }),
@@ -520,13 +587,25 @@ describe("FunctionsTests", () => {
             }),
         );
 
-        evalAllNodesWithFunctions(bodyMap);
+        evalAllNodesWithFunctions("bodyMap", bodyMap);
+        const fnKeysListCallbackFooRes: List<string> =
+            getExposedFunctionKeysWithTarget("bodyMap.1.onPress");
 
-        expect((globalThis as Global)["onPressBody"]()).toEqual(
+        expect(fnKeysListCallbackFooRes.get(0)).toEqual("bodyMap.1.onPress");
+
+        expect((globalThis as Global)["bodyMap.1.onPress"]()).toEqual(
+            "callbackFoo_shouldHandleListOfChildrenOFText",
+        );
+
+        const fnKeysListCallbackBodyRes: List<string> =
+            getExposedFunctionKeysWithTarget("bodyMap.3.onPress");
+
+        expect(fnKeysListCallbackBodyRes.get(0)).toEqual("bodyMap.3.onPress");
+
+        expect((globalThis as Global)["bodyMap.3.onPress"]()).toEqual(
             "callbackBody_shouldHandleListOfChildrenOFText",
         );
 
-        expect((globalThis as Global)["onPress"]()).toEqual("callback");
         done();
     });
 

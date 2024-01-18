@@ -448,11 +448,11 @@ func READ(_ str: String) -> String {
     return str
 }
 
-func testCallback() -> String {
+func testCallback(withBuildID buildID : String) -> String {
     var resultString = ""
     let semaphore = DispatchSemaphore(value: 0)
 
-    if let callbackFunction = context?.objectForKeyedSubscript("onPress"), let result = callbackFunction.call(withArguments: []) {
+    if let callbackFunction = context?.objectForKeyedSubscript("invokeExposedJsFn"), let result = callbackFunction.call(withArguments: [buildID]) {
         if let output = result.toString() {
             // this will return and return EVAL
             resultString = output
@@ -503,24 +503,25 @@ func downloadBundle() -> String {
 }
 
 func EVAL(_ str: String) -> String {
-    var resultString = ""
+	var resultString : [String] = []
     switch str {
         case "test-callback":
-            return testCallback()
+			resultString.append(downloadBundle())
+			resultString.append(testCallback(withBuildID: "app.3.onPress"))
+			resultString.append(testCallback(withBuildID: "app.4.onPress"))
         case "start":
             NotificationCenter.default.post(name: .createWindow, object: nil)
         case "fetch":
             socketDelegate.connectToBundler()
         case "download":
-            resultString = downloadBundle()
+			resultString.append(downloadBundle())
             NotificationCenter.default.post(name: .refreshWindow, object: nil)
-            return resultString
         case "disconnect":
             break
         default:
             break
     }
-    return str
+	return resultString.joined(separator: "\n")
 }
 
 func PRINT(_ exp: String) -> String {
