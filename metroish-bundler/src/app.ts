@@ -33,8 +33,5 @@ export const getRootNode = () => {
     return JSON.stringify(evalAllNodesWithFunctions("app", app));
 };
 
-// Assign getRootNode to the global object
 (globalThis as Global)["getRootNode"] = getRootNode;
 (globalThis as Global)["invokeExposedJsFn"] = invokeExposedJsFn;
-// getRootNode();
-// console.log(invokeExposedJsFn("app.4.onPress"));
