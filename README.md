@@ -72,3 +72,9 @@ export const getRootNode = () => {
 - Build and Run
 - it should listen for changes via websockets from the metroish-bundler (webpack)
 - try changing src/app.ts and see the results
+
+## Access the repl
+
+- cd tools-cli
+- user> start
+- user> download
