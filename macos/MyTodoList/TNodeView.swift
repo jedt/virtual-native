@@ -15,9 +15,5 @@ class TNodeView: NSView {
 
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
-
-        // Custom drawing code here
-//        NSColor.red.setFill()
-//        dirtyRect.fill()
     }
 }

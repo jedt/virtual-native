@@ -6,10 +6,6 @@
 //
 
 import Cocoa
-extension Notification.Name {
-    static let createWindow = Notification.Name("createWindow")
-    static let refreshWindow = Notification.Name("refreshWindow")
-}
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -37,7 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         NotificationCenter.default.addObserver(self, selector: #selector(handleCreateWindow(_:)), name: .createWindow, object: nil)
-		startServer()
+        startServer()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

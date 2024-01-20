@@ -25,19 +25,25 @@
             </BuildableReference>
             <SkippedTests>
                <Test
-                  Identifier = "FunctionsTest/testCalculateLayoutFromPrintedOutput()">
-               </Test>
-               <Test
                   Identifier = "FunctionsTest/testChildrenArrayOfDictionariesParseJSONStringToTree()">
                </Test>
                <Test
-                  Identifier = "FunctionsTest/testCreateRect()">
+                  Identifier = "FunctionsTest/testComplexNestedNode()">
                </Test>
                <Test
                   Identifier = "FunctionsTest/testDictionaryFromTNodeParseJSONStringToTree()">
                </Test>
                <Test
                   Identifier = "FunctionsTest/testGetChildrenRepresentationArrayOfArraysParseJSONStringToTree()">
+               </Test>
+               <Test
+                  Identifier = "FunctionsTest/testSimpleNodeDictionary()">
+               </Test>
+               <Test
+                  Identifier = "FunctionsTest/testTwoChildren()">
+               </Test>
+               <Test
+                  Identifier = "FunctionsTest/testWithCallback()">
                </Test>
             </SkippedTests>
          </TestableReference>

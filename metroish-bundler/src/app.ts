@@ -5,12 +5,12 @@ const { evalAllNodesWithFunctions, invokeExposedJsFn } =
 const { h, ht } = fn.fnMap();
 
 const renderApp = () => {
-    const touchableMathCallback = function () {
-        return Math.PI;
-    };
-
     const touchableFooCallback = function () {
         return "## bar ##";
+    };
+
+    const asyncCallback = function () {
+        Math.PI;
     };
 
     return h("bodyOfTwo", {}, [
@@ -19,8 +19,8 @@ const renderApp = () => {
             "divTarget",
             {},
             h("View", {}, [
-                h("touchable", { onPress: touchableFooCallback }),
-                h("touchable", { onPress: touchableMathCallback }),
+                h("NSButton", { onPress: touchableFooCallback }),
+                h("NSButton", { onPress: asyncCallback }),
                 ht("View", "Sibling one"),
             ]),
         ),
@@ -36,6 +36,5 @@ export const getRootNode = () => {
 // Assign getRootNode to the global object
 (globalThis as Global)["getRootNode"] = getRootNode;
 (globalThis as Global)["invokeExposedJsFn"] = invokeExposedJsFn;
-
 // getRootNode();
 // console.log(invokeExposedJsFn("app.4.onPress"));

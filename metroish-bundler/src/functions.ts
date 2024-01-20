@@ -38,7 +38,7 @@ export function parseFunctionsFnMap(): any {
     function setBrideIDToNodePropIfNecessary(
         moduleName: string,
         node: NodeMapType,
-    ): [NodeMapType, any] {
+    ): Map<string, any> {
         const props: Map<string, any> = node.get("props");
         const id = props.get("id") as string;
         let bridgeID = "";
@@ -51,12 +51,12 @@ export function parseFunctionsFnMap(): any {
             },
         );
         if (propsWithFunctions.size == 0) {
-            return [node, bridgeID];
+            return Map({ node: node, bridgeID: bridgeID });
         } else {
-            return [
-                node.set("props", props.set("bridgeID", bridgeID)),
-                bridgeID,
-            ];
+            return Map({
+                node: node.set("props", props.set("bridgeID", bridgeID)),
+                bridgeID: bridgeID,
+            });
         }
     }
 
@@ -67,10 +67,12 @@ export function parseFunctionsFnMap(): any {
         if (node.has("props")) {
             const props: Map<string, any> = node.get("props");
             if (Map.isMap(props)) {
-                const [nodeCopy, bridgeID] = setBrideIDToNodePropIfNecessary(
-                    moduleName,
-                    node,
-                );
+                const newMapValue: Map<string, any> =
+                    setBrideIDToNodePropIfNecessary(moduleName, node);
+
+                const nodeCopy = newMapValue.get("node");
+                const bridgeID = newMapValue.get("bridgeID");
+
                 const processedProps = props.map((value, key) => {
                     if (typeof value === "string" && isFunctionString(value)) {
                         try {
@@ -89,8 +91,9 @@ export function parseFunctionsFnMap(): any {
                     }
                 });
 
-                nodeCopy.set("props", processedProps);
-                const children = utils.childrenFromMapNode(nodeCopy);
+                const children = utils.childrenFromMapNode(
+                    nodeCopy.set("props", processedProps),
+                );
                 if (List.isList(children)) {
                     return nodeCopy.set(
                         "children",
