@@ -1,6 +1,6 @@
 # virtual-native
 
-Very WIP - Create macos native apps using Typescript. Construct a virtual DOM in typescript and see it render it in macos as NSViews. I would like to hear your thoughts, submit an issue
+Very WIP - Create native MacOS apps using Typescript. Construct a virtual DOM and see it render in MacOS as NSViews. I would like to hear your thoughts, submit an issue
 
 ![screenshot](https://github.com/jedt/virtual-native/blob/main/screenshot.png?raw=true)
 
